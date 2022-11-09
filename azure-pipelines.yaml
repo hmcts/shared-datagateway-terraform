@@ -75,7 +75,7 @@ stages:
         displayName: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
         condition: succeeded()
         jobs:
-          - job: Test-Step
+          - job: Test_Step
             steps:
             - task: Bash@3
               inputs:
