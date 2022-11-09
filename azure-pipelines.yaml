@@ -33,7 +33,6 @@ parameters:
       - plan
       - apply
       - destroy
-
   - name: location
     displayName: Location
     type: string
@@ -76,30 +75,9 @@ stages:
         displayName: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
         condition: succeeded()
         jobs:
-          - job:
-             steps:
-               - task: Bash@3
-                 displayName: Push Configuration to Devices
-                 inputs:
-                   targetType: "inline"
-                   script: |
-                     echo "pipeline is happy"
-
-  #            steps:
-#              - template: steps/terraform.yaml@cnp-azuredevops-libraries
-#                parameters:
-#                  location: ${{ deployment.location }}
-#                  serviceConnection: "HMCTS-HUB-${{ upper(deployment.environment) }}-INTSVC"
-#                  product: $(product)
-#                  overrideAction: ${{ parameters.overrideAction }}
-#                  environment: ${{ deployment.environment }}
-#                  multiRegion: true
-#                  terraformInitSubscription: ${{ variables.terraformInitSubscription }}
-#                  initCommandOptions: >
-#                    -reconfigure
-#                  planCommandOptions: >
-#                    -compact-warnings
-#                    -lock-timeout=30s
-
-
-
+          - job: Test_Step
+            steps:
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: echo "pipeline is happy"
