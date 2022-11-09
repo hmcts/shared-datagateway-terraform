@@ -80,4 +80,4 @@ stages:
             - task: Bash@3
               inputs:
                 targetType: 'inline'
-                script: echo "pipeline is happy
+                script: echo "pipeline is happy"
