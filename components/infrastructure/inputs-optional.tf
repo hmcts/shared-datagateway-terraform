@@ -38,6 +38,10 @@ variable "project" {
   default = "ctsc"
 }
 
+variable "env" {
+  type    = string
+}
+
 #variable "mgmt_vnet_name" {
 #  type    = string
 #  default = "core-infra-vnet-mgmt"
