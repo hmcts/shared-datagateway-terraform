@@ -21,6 +21,7 @@ parameters:
       - deployment: "ctsc-datagateway"
         environment: "nonprod"
         targetEnvironment: "nonprod"
+        resourceGroupName: azure-control-stg-rg
         dependsOn: "Precheck"
       - deployment: "ctsc-datagateway"
         environment: "prod"
@@ -84,6 +85,7 @@ stages:
                 terraformInitSubscription: ${{ variables.terraformInitSubscription }}
                 initCommandOptions: >
                   -reconfigure
+                  -backend-config resource_group_name=${{ deployment.resourceGroupName }}
                 planCommandOptions: >
                   -compact-warnings
                   -lock-timeout=30s
