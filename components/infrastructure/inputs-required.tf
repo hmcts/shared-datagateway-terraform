@@ -5,6 +5,7 @@ variable "env" {
 
 variable "location" {
   type = string
+  default = "uksouth"
 }
 #
 ## Networking
