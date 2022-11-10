@@ -70,7 +70,7 @@ stages:
         displayName: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
         condition: succeeded()
         jobs:
-          steps:
+          - steps:
             - template: steps/terraform.yaml@cnp-azuredevops-libraries
               parameters:
                 serviceConnection: "HMCTS-HUB-${{ upper(deployment.environment) }}-INTSVC"
