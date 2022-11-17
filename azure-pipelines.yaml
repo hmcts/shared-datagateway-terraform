@@ -38,8 +38,6 @@ parameters:
 variables:
   - name: tfversion
     value: 1.0.11
-  - name: project
-    value: ctsc
   - name: timeoutInMinutes
     value: "60"
   - name: agentPool
