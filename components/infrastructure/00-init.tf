@@ -17,6 +17,14 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
+provider "azurerm" {
+  alias = "hub"
+  features {}
+  skip_provider_registration = true
+  subscription_id            = var.hub_subscription_id
+}
+
+
 #provider "azurerm" {
 #  alias = "additional_hub"
 #  features {}

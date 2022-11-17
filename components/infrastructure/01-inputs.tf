@@ -3,11 +3,29 @@
 #  type = string
 #}
 #
-#variable "additional_hub_subscription_id" {
-#  type = string
-#  # HMCTS-HUB-NONPROD-INTSVC
-#  default = "fb084706-583f-4c9a-bdab-949aac66ba5c"
-#}
+
+variable "location" {
+  type    = string
+  default = "UK South"
+}
+
+variable "environment" {
+  description = "Environment like sbox / nonprod and prod"
+}
+
+variable "subnet_prefix" {
+  type = string
+}
+
+variable "env" {
+  type = string
+}
+
+variable "hub_subscription_id" {
+  type = string
+  # HMCTS-HUB-PROD-INTSVC
+  default = "fb084706-583f-4c9a-bdab-949aac66ba5c"
+}
 #
 #variable "dns_zone_subscription_id" {
 #  type = string
@@ -38,9 +56,7 @@ variable "project" {
   default = "ctsc"
 }
 
-variable "env" {
-  type    = string
-}
+
 
 #variable "mgmt_vnet_name" {
 #  type    = string
