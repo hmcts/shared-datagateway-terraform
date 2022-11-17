@@ -3,8 +3,8 @@
 #subnets
 
 data "azurerm_key_vault" "hub_azure_keyvault" {
-  name                = "${var.product}-infra-hub-${var.environment}"
-  resource_group_name = "${var.product}-infra-hub-${var.environment}"
+  name                = "hmcts-infra-hub-${var.environment}"
+  resource_group_name = "hmcts-infra-hub-${var.environment}"
 }
 
 data "azurerm_key_vault_secret" "hub_rg_name" {
