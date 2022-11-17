@@ -1,3 +1,4 @@
+
 resource "azurerm_key_vault" "ctsc_key_vault" {
   name                            = format("ctsc-%s-%s-kv", var.env, local.location_abrv)
   location                        = var.location
@@ -22,4 +23,3 @@ data "azurerm_key_vault_secret" "vm_admin_password" {
   name         = "admin_password"
   key_vault_id = data.azurerm_key_vault.panorama_kv.id
 }
-

@@ -1,4 +1,3 @@
-
 module "ctsc" {
   source           = "../modules/gateway-vm"
   location         = var.location
@@ -8,5 +7,3 @@ module "ctsc" {
   subnet_id        = azurerm_subnet.pbi-data-gateway.id
   admin_password   = data.azurerm_key_vault_secret.vm_admin_password.value
 }
-
-
