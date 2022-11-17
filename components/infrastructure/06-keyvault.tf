@@ -13,13 +13,13 @@ resource "azurerm_key_vault" "ctsc_key_vault" {
 }
 
 data "azurerm_client_config" "current" {}
-
-data "azurerm_key_vault" "panorama_kv" {
-  name                = azurerm_key_vault.ctsc_key_vault.name
-  resource_group_name = azurerm_resource_group.ctsc_rg.name
-}
-
-data "azurerm_key_vault_secret" "vm_admin_password" {
-  name         = "admin_password"
-  key_vault_id = data.azurerm_key_vault.panorama_kv.id
-}
+#
+#data "azurerm_key_vault" "panorama_kv" {
+#  name                = azurerm_key_vault.ctsc_key_vault.name
+#  resource_group_name = azurerm_resource_group.ctsc_rg.name
+#}
+#
+#data "azurerm_key_vault_secret" "vm_admin_password" {
+#  name         = "admin_password"
+#  key_vault_id = data.azurerm_key_vault.panorama_kv.id
+#}
