@@ -2,9 +2,9 @@
 
 # General
 locals {
-  location_abrv        = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
-  rg_name              = "${var.product}-${local.location_abrv}"
-  common_tags          = module.ctags.common_tags
+  location_abrv = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
+  rg_name       = "${var.product}-${local.location_abrv}"
+  common_tags   = module.ctags.common_tags
 }
 
 

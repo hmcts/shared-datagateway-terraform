@@ -6,7 +6,6 @@ data "azurerm_key_vault" "hub_azure_keyvault" {
   name                = "${var.product}-infra-hub-${var.environment}"
   resource_group_name = "${var.product}-infra-hub-${var.environment}"
 }
-// will be passed as env vars
 
 data "azurerm_key_vault_secret" "hub_rg_name" {
   name         = "rg-name"
@@ -38,7 +37,7 @@ resource "azurerm_network_security_group" "nsg_ctsc" {
   name                = "nsg_ctsc"
   location            = azurerm_resource_group.ctsc_rg.location
   resource_group_name = azurerm_resource_group.ctsc_rg.name
-#  tags                = local.common_tags
+  tags                = local.common_tags
 }
 
 

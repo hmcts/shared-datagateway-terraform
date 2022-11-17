@@ -23,10 +23,10 @@ parameters:
         targetEnvironment: "nonprod"
         resourceGroupName: azure-control-stg-rg
         dependsOn: "Precheck"
-      - deployment: "ctsc-datagateway"
-        environment: "prod"
-        targetEnvironment: "prod"
-        dependsOn: "Precheck"
+#      - deployment: "ctsc-datagateway"
+#        environment: "prod"
+#        targetEnvironment: "prod"
+#        dependsOn: "Precheck"
   - name: overrideAction
     type: string
     default: plan
