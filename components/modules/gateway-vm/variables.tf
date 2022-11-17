@@ -8,13 +8,13 @@ variable "environment" {
   type = string
 }
 
-variable "subnet_prefix" {
-  type = string
-}
+#variable "subnet_prefix" {
+#  type = string
+#}
 
-variable "hub_subscription_id" {
-  type = string
-}
+#variable "hub_subscription_id" {
+#  type = string
+#}
 
 variable "subnet_id" {
   type        = string
@@ -31,19 +31,26 @@ variable "vmsize" {
 variable "vm_admin_username" {
   type        = string
   description = "ctsc vm admin username, defaults to 'ctscadmin'"
+  default     = "ctscadmin"
 }
 
 variable "ctsc_rg_location" {
-
+  type = string
 }
 
 variable "ctsc_rg_name" {
-
+  type = string
 }
 
 variable "admin_password" {
   type        = string
   description = "admin_password"
+}
+
+variable "tags" {
+  type        = any
+  description = "Resource tag values"
+  default     = {}
 }
 
 # General
@@ -62,9 +69,9 @@ variable "project" {
   default = "ctsc"
 }
 
-variable "env" {
-  type = string
-}
+#variable "env" {
+#  type = string
+#}
 
 
 
@@ -72,16 +79,7 @@ variable "env" {
 locals {
   location_abrv        = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
   rg_name              = "${var.product}-${local.location_abrv}"
-  common_tags          = module.ctags.common_tags
   resource_name_prefix = format("%s-%s-%s", var.project, var.environment, local.location_abrv)
 }
 
-
-# Common tags
-module "ctags" {
-  source      = "github.com/hmcts/terraform-module-common-tags"
-  builtFrom   = var.builtFrom
-  environment = var.env
-  product     = var.product
-}
 

@@ -10,7 +10,7 @@ resource "azurerm_availability_set" "ctsc_vm_avset" {
   resource_group_name          = local.rg_name
   platform_fault_domain_count  = 2
   platform_update_domain_count = 2
-  tags                         = local.common_tags
+  tags                         = var.tags
 }
 
 
@@ -21,7 +21,7 @@ resource "azurerm_windows_virtual_machine" "ctsc_vm" {
   size                = var.vmsize
   admin_username      = var.vm_admin_username
   admin_password      = var.admin_password
-  tags                = local.common_tags
+  tags                = var.tags
   availability_set_id = azurerm_availability_set.ctsc_vm_avset.id
   network_interface_ids = [
     azurerm_network_interface.ctsc_nic.id,
