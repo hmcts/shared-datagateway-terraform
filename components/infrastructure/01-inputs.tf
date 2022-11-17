@@ -10,7 +10,7 @@ variable "location" {
 }
 
 variable "environment" {
-  description = "Environment like sbox / nonprod and prod"
+  type = string
 }
 
 variable "subnet_prefix" {
