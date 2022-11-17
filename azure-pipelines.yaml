@@ -21,11 +21,12 @@ parameters:
       - deployment: "ctsc-datagateway"
         environment: "nonprod"
         targetEnvironment: "nonprod"
+        resourceGroupName: azure-control-stg-rg
         dependsOn: "Precheck"
-      - deployment: "ctsc-datagateway"
-        environment: "prod"
-        targetEnvironment: "prod"
-        dependsOn: "Precheck"
+#      - deployment: "ctsc-datagateway"
+#        environment: "prod"
+#        targetEnvironment: "prod"
+#        dependsOn: "Precheck"
   - name: overrideAction
     type: string
     default: plan
@@ -33,28 +34,21 @@ parameters:
       - plan
       - apply
       - destroy
-  - name: location
-    displayName: Location
-    type: string
-    default: "UK South"
-    values:
-      - "UK South"
 
 variables:
   - name: tfversion
-    value: 1.0.10
-  - name: project
-    value: ctsc
+    value: 1.0.11
   - name: timeoutInMinutes
     value: "60"
   - name: agentPool
     value: "ubuntu-latest"
   - name: build
     value: $(Build.BuildNumber)
-  - name: isMaster
-    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   - name: product
-    value: "ctsc-datagateway"
+    value: "ctsc"
+  - name: terraformInitSubscription
+    value: 04d27a32-7a07-48b3-95b8-3c8691e1a263
+  - template: vars/input-variables.yaml@cnp-azuredevops-libraries
 
 stages:
   - stage: Precheck
@@ -75,9 +69,21 @@ stages:
         displayName: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
         condition: succeeded()
         jobs:
-          - job: Test_Step
+          - job: TerraformPlanApply
+            pool:
+             vmImage: ${{ variables.agentPool }}
             steps:
-            - task: Bash@3
-              inputs:
-                targetType: 'inline'
-                script: echo "pipeline is happy"
+            - template: steps/terraform.yaml@cnp-azuredevops-libraries
+              parameters:
+                serviceConnection: "HMCTS-HUB-${{ upper(deployment.environment) }}-INTSVC"
+                product: $(product)
+                overrideAction: ${{ parameters.overrideAction }}
+                environment: ${{ deployment.environment }}
+                component: "infrastructure"
+                terraformInitSubscription: ${{ variables.terraformInitSubscription }}
+                initCommandOptions: >
+                  -reconfigure
+                  -backend-config resource_group_name=${{ deployment.resourceGroupName }}
+                planCommandOptions: >
+                  -compact-warnings
+                  -lock-timeout=30s
