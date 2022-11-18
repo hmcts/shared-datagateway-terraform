@@ -43,7 +43,7 @@ variable "subnet_id" {
 }
 
 # Virtual Machine
-variable "vmsize" {
+variable "vm_size" {
   type        = string
   description = "Vm Instance size"
   default     = "Standard_D3_v2"
