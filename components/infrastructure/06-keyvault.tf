@@ -1,6 +1,5 @@
 
 resource "azurerm_key_vault" "ctsc_key_vault" {
-  count                           = var.env == "nonprod" ? 1  : 0
   name                            = format("ctsc-%s-%s-kv", var.env, local.location_abrv)
   location                        = var.location
   resource_group_name             = azurerm_resource_group.ctsc_rg.name
