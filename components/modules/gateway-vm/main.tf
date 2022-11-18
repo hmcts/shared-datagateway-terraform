@@ -32,6 +32,8 @@ resource "azurerm_windows_virtual_machine" "ctsc_vm" {
     storage_account_type = "Standard_LRS"
   }
 
+  #  CIS Microsoft Windows Server 2019 STIG Benchmark
+
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
