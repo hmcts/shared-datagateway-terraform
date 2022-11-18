@@ -1,4 +1,33 @@
-#General
+# General
+variable "builtFrom" {
+  type    = string
+  default = "hmcts/ctsc-datagateway-terraform"
+}
+
+variable "product" {
+  type    = string
+  default = "ctsc"
+}
+
+variable "project" {
+  type    = string
+  default = "ctsc"
+}
+
+variable "ctsc_rg_location" {
+  type = string
+}
+
+variable "ctsc_rg_name" {
+  type = string
+}
+
+variable "tags" {
+  type        = any
+  description = "Resource tag values"
+  default     = {}
+}
+
 variable "location" {
   type    = string
   default = "UK South"
@@ -18,6 +47,12 @@ variable "vmsize" {
   type        = string
   description = "Vm Instance size"
   default     = "Standard_D3_v2"
+}
+
+variable "vm_storage_account_type" {
+  type        = string
+  description = "Storage account type"
+  default     = "StandardSSD_LRS"
 }
 
 variable "vm_admin_user" {
@@ -46,44 +81,23 @@ variable "vm_version" {
   type = string
 }
 
-variable "ctsc_rg_location" {
-  type = string
-}
-
-variable "ctsc_rg_name" {
-  type = string
-}
-
-variable "tags" {
-  type        = any
-  description = "Resource tag values"
-  default     = {}
-}
-
-# General
-variable "builtFrom" {
-  type    = string
-  default = "hmcts/ctsc-datagateway-terraform"
-}
-
-variable "product" {
-  type    = string
-  default = "ctsc"
-}
-
-variable "project" {
-  type    = string
-  default = "ctsc"
-}
-
 variable "vm_zones" {
   type = list(object({
     vm_count = string,
-    vm_zone = string
+    vm_zone  = string
   }))
   description = "Zone and VM entry detail"
 }
 
+variable "vm_publisher_name" {
+  type = string
+}
+
+variable "os_type" {
+  default = null
+}
+
+# Splunk
 variable "install_splunk_uf" {
   type = bool
 }
@@ -136,14 +150,6 @@ variable "nessus_key" {
 
 variable "nessus_groups" {
   type = string
-}
-
-variable "vm_publisher_name" {
- type = string
-}
-
-variable "os_type" {
-  default = null
 }
 
 # Locals

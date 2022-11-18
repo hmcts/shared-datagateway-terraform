@@ -89,7 +89,7 @@ variable "vm_publisher_name" {
 
 # Nessus Agent
 variable "nessus_install" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -98,7 +98,7 @@ variable "nessus_server" {
 }
 
 variable "nessus_key_name" {
-  type = string
+  type    = string
   default = null
 }
 

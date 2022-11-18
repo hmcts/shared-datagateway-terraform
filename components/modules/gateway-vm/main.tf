@@ -55,8 +55,3 @@ module "vm-bootstrap" {
   install_dynatrace_oneagent   = false
   install_azure_monitor        = false
 }
-
-
-
-
-
