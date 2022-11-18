@@ -1,3 +1,19 @@
+data "azurerm_client_config" "current" {}
+
+data "azurerm_key_vault" "ctsc_kv" {
+  name                = azurerm_key_vault.ctsc_key_vault.name
+  resource_group_name = azurerm_resource_group.ctsc_rg.name
+}
+
+data "azurerm_key_vault_secret" "vm_admin_password" {
+  name         = "ctsc-admin-password"
+  key_vault_id = data.azurerm_key_vault.ctsc_kv.id
+}
+
+data "azurerm_key_vault_secret" "vm_admin_user" {
+  name         = "ctsc-admin-user"
+  key_vault_id = data.azurerm_key_vault.ctsc_kv.id
+}
 
 resource "azurerm_key_vault" "ctsc_key_vault" {
   name                            = format("ctsc-%s-%s-kv", var.env, local.location_abrv)
@@ -12,14 +28,4 @@ resource "azurerm_key_vault" "ctsc_key_vault" {
   tags                            = local.common_tags
 }
 
-data "azurerm_client_config" "current" {}
-#
-#data "azurerm_key_vault" "ctsc_kv" {
-#  name                = azurerm_key_vault.ctsc_key_vault.name
-#  resource_group_name = azurerm_resource_group.ctsc_rg.name
-#}
-#
-#data "azurerm_key_vault_secret" "vm_admin_password" {
-#  name         = "localadminuser"
-#  key_vault_id = data.azurerm_key_vault.ctsc_kv.id
-#}
+

@@ -28,10 +28,14 @@ variable "vmsize" {
   default     = "Standard_D3_v2"
 }
 
-variable "vm_admin_username" {
+variable "vm_admin_user" {
   type        = string
   description = "ctsc vm admin username, defaults to 'ctscadmin'"
-  default     = "ctscadmin"
+}
+
+variable "vm_admin_password" {
+  type        = string
+  description = "admin_password"
 }
 
 variable "ctsc_rg_location" {
@@ -40,11 +44,6 @@ variable "ctsc_rg_location" {
 
 variable "ctsc_rg_name" {
   type = string
-}
-
-variable "admin_password" {
-  type        = string
-  description = "admin_password"
 }
 
 variable "tags" {
@@ -73,13 +72,17 @@ variable "project" {
 #  type = string
 #}
 
-
+variable "zones" {
+  type = list(any)
+}
 
 # General
 locals {
   location_abrv        = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
   rg_name              = "${var.product}-${local.location_abrv}"
   resource_name_prefix = format("%s-%s-%s", var.project, var.environment, local.location_abrv)
+  zones                = toset(var.zones)
+
 }
 
 
