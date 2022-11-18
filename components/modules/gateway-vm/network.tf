@@ -1,6 +1,10 @@
 # NIC
 resource "azurerm_network_interface" "ctsc_nic" {
-  name                = "ctsc-nic"
+  for_each = {
+  for idx, entry in var.vm_zones : "ctsc-nic-${entry.vm_count}" => entry
+  }
+
+  name                = "ctsc-datagateway-${local.location_abrv}-nic-${each.value.vm_count}"
   location            = var.location
   resource_group_name = local.rg_name
 

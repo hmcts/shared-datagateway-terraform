@@ -17,7 +17,7 @@ data "azurerm_key_vault_secret" "vm_admin_user" {
 }
 
 resource "azurerm_key_vault" "ctsc_key_vault" {
-  name                            = format("ctsc-%s-%s-kv", var.env, local.location_abrv)
+  name                            = format("ctsc-%s-%s-kv", var.environment, local.location_abrv)
   location                        = var.location
   resource_group_name             = azurerm_resource_group.ctsc_rg.name
   enabled_for_disk_encryption     = true
