@@ -1,7 +1,7 @@
 # Output - vm provisioned
 output "ctsc_vm_name" {
   description = "Provisioned CTSC vm name"
-  value       =  toset([for vm in azurerm_windows_virtual_machine.ctsc_vm : vm.name])
+  value       = toset([for vm in azurerm_windows_virtual_machine.ctsc_vm : vm.name])
 }
 
 # Output - vm to private ip
