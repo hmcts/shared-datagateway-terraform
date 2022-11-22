@@ -1,3 +1,4 @@
+# General
 variable "location" {
   type    = string
   default = "UK South"
@@ -5,6 +6,11 @@ variable "location" {
 
 variable "environment" {
   type = string
+}
+
+variable "infra_hub_suffix" {
+  type    = string
+  default = "nonprodi"
 }
 
 variable "subnet_prefix" {
@@ -15,10 +21,14 @@ variable "hub_subscription_id" {
   type = string
 }
 
-# General
 variable "builtFrom" {
   type    = string
   default = "hmcts/ctsc-datagateway-terraform"
+}
+
+variable "buildEnv" {
+  type    = string
+  default = "stg"
 }
 
 variable "product" {
@@ -31,41 +41,115 @@ variable "project" {
   default = "ctsc"
 }
 
+variable "vm_zones" {
+  type = list(object({
+    vm_count = string,
+    vm_zone  = string
+  }))
+  description = "Zone and VM entry detail"
+}
+
 variable "env" {
   type = string
 }
 
-#
-#variable "dns_zone_subscription_id" {
-#  type = string
-#  # DTS-CFTSBOX-INTSVC
-#  default = "1497c3d7-ab6d-4bb7-8a10-b51d03189ee3"
-#}
-#
-## Management
-#variable "mgmt_subscription_id" {
-#  type = string
-#  # Reform-CFT-Mgmt
-#  default = "ed302caf-ec27-4c64-a05e-85731c3ce90e"
-#}
+# Splunk
+variable "install_splunk_uf" {
+  default = false
+}
 
-#variable "mgmt_vnet_name" {
-#  type    = string
-#  default = "core-infra-vnet-mgmt"
-#}
-#
-#variable "mgmt_vnet_rg_name" {
-#  type    = string
-#  default = "rg-mgmt"
-#}
-#
-## Networking
-#variable "additional_hub_vnets" {
-#  type    = map(string)
-#  default = {}
-#}
-#
-#variable "hub_uks_vnets" {
-#  type    = map(string)
-#  default = {}
-#}
+variable "cnp_vault_rg" {
+  type = string
+}
+
+variable "cnp_vault_sub" {
+  type = string
+}
+
+# VM details
+variable "vm_publisher" {
+  type = string
+}
+
+variable "vm_offer" {
+  type = string
+}
+
+variable "vm_sku" {
+  type = string
+}
+
+variable "vm_version" {
+  type = string
+}
+
+variable "vm_publisher_name" {
+  type = string
+}
+
+# Nessus Agent
+variable "nessus_install" {
+  type    = bool
+  default = false
+}
+
+variable "nessus_server" {
+  type = string
+}
+
+variable "nessus_key_name" {
+  type    = string
+  default = null
+}
+
+variable "nessus_groups" {
+  type = string
+}
+
+data "azurerm_key_vault" "soc_vault" {
+  count    = var.install_splunk_uf ? 1 : 0
+  provider = azurerm.soc
+
+  name                = "soc-prod"
+  resource_group_name = "soc-core-infra-prod-rg"
+}
+
+data "azurerm_key_vault_secret" "splunk_username" {
+  count    = var.install_splunk_uf ? 1 : 0
+  provider = azurerm.soc
+
+  name         = "splunk-gui-admin-username"
+  key_vault_id = data.azurerm_key_vault.soc_vault[0].id
+}
+
+data "azurerm_key_vault_secret" "splunk_password" {
+  count    = var.install_splunk_uf ? 1 : 0
+  provider = azurerm.soc
+
+  name         = "splunk-gui-admin-password"
+  key_vault_id = data.azurerm_key_vault.soc_vault[0].id
+}
+
+data "azurerm_key_vault_secret" "splunk_pass4symmkey" {
+  count    = var.install_splunk_uf ? 1 : 0
+  provider = azurerm.soc
+
+  name         = "Splunk-pass4SymmKey"
+  key_vault_id = data.azurerm_key_vault.soc_vault[0].id
+}
+
+data "azurerm_key_vault" "soc_vault2" {
+  count    = var.nessus_install ? 1 : 0
+  provider = azurerm.soc
+
+  name                = "soc-prod"
+  resource_group_name = "soc-core-infra-prod-rg"
+}
+
+data "azurerm_key_vault_secret" "nessus_key" {
+  count    = var.nessus_install ? 1 : 0
+  provider = azurerm.soc
+
+  name         = var.nessus_key_name
+  key_vault_id = data.azurerm_key_vault.soc_vault2[0].id
+}
