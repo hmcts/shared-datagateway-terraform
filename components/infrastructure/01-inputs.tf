@@ -41,6 +41,17 @@ variable "project" {
   default = "ctsc"
 }
 
+# Virtual Machine
+variable "vm_size" {
+  type        = string
+  description = "Vm Instance size"
+}
+
+variable "vm_storage_account_type" {
+  type        = string
+  description = "Storage account type"
+}
+
 variable "vm_zones" {
   type = list(object({
     vm_count = string,
