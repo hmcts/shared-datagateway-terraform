@@ -37,6 +37,10 @@ variable "environment" {
   type = string
 }
 
+variable "rg_name" {
+  type = string
+}
+
 variable "subnet_id" {
   type        = string
   description = "subnet id"
@@ -155,7 +159,6 @@ variable "nessus_groups" {
 # Locals
 locals {
   location_abrv        = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
-  rg_name              = "${var.product}-${local.location_abrv}"
   os_type              = var.os_type == null ? substr(var.vm_publisher_name, 0, 9) == "Microsoft" ? "Windows" : "Linux" : var.os_type
   resource_name_prefix = format("%s-%s-%s", var.project, var.environment, local.location_abrv)
 }

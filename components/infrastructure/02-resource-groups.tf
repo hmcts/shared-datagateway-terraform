@@ -1,5 +1,5 @@
 #panorama-sbox-ukw-rg
 resource "azurerm_resource_group" "ctsc_rg" {
-  name     = "${local.rg_name}-rg"
+  name     = local.rg_name
   location = var.location
 }
