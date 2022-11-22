@@ -8,7 +8,7 @@ resource "azurerm_windows_virtual_machine" "ctsc_vm" {
     for idx, entry in var.vm_zones : "ctsc-vm-${entry.vm_count}" => entry
   }
 
-  name                = "ctsc-datagateway-vm${each.value.vm_count}"
+  name                = "ctsc-dgw-vm${each.value.vm_count}"
   resource_group_name = var.ctsc_rg_name
   location            = var.ctsc_rg_location
   size                = var.vm_size
