@@ -50,13 +50,11 @@ variable "subnet_id" {
 variable "vm_size" {
   type        = string
   description = "Vm Instance size"
-  default     = "Standard_D3_v2"
 }
 
 variable "vm_storage_account_type" {
   type        = string
   description = "Storage account type"
-  default     = "StandardSSD_LRS"
 }
 
 variable "vm_admin_user" {
