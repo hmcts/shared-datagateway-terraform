@@ -6,7 +6,7 @@ resource "azurerm_network_interface" "ctsc_nic" {
 
   name                = "ctsc-datagateway-${local.location_abrv}-nic-${each.value.vm_count}"
   location            = var.location
-  resource_group_name = local.rg_name
+  resource_group_name = var.rg_name
 
   ip_configuration {
     name                          = "internal"

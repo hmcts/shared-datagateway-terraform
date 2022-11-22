@@ -2,6 +2,7 @@ module "ctsc" {
   source              = "../modules/gateway-vm"
   location            = var.location
   environment         = var.environment
+  rg_name             = local.rg_name
   ctsc_rg_location    = azurerm_resource_group.ctsc_rg.location
   ctsc_rg_name        = azurerm_resource_group.ctsc_rg.name
   subnet_id           = azurerm_subnet.gateway_subnet.id
