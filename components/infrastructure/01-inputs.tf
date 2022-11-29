@@ -117,6 +117,22 @@ variable "nessus_groups" {
   type = string
 }
 
+variable "automation_account_name" {
+  type = string
+}
+variable "log_analytics_workspace_name" {
+  type = string
+}
+variable "sku_name_workspace" {
+  type = string
+}
+variable "log_retention_days" {
+  type = number
+}
+variable "sku_name" {
+  description = "The SKU name of the account - only Basic is supported at this time"
+}
+
 data "azurerm_key_vault" "soc_vault" {
   count    = var.install_splunk_uf ? 1 : 0
   provider = azurerm.soc
