@@ -35,3 +35,4 @@ automation_account_name      = "ctsc-dgw-automation"
 log_analytics_workspace_name = "ctsc-dgw-workspace"
 sku_name_workspace           = "PerGB2018"
 log_retention_days           = 30
+sku_name                     = "Basic"
