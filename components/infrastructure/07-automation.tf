@@ -5,6 +5,7 @@ resource "azurerm_automation_account" "ctsc_auto" {
   sku_name            = var.sku_name
   tags                = local.common_tags
 }
+
 resource "azurerm_log_analytics_workspace" "ctsc_workspace" {
   name                = var.log_analytics_workspace_name
   location            = var.location
