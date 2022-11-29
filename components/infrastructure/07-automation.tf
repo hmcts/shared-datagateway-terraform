@@ -15,7 +15,7 @@ resource "azurerm_log_analytics_workspace" "ctsc_workspace" {
 
 # Associate workspace and automation account
 resource "azurerm_log_analytics_linked_service" "automation_workspace_assoc" {
-  resource_group_name = data.azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.ctsc_rg.name
   workspace_id        = azurerm_log_analytics_workspace.ctsc_workspace.id
   read_access_id      = azurerm_automation_account.ctsc_auto.id
 }
