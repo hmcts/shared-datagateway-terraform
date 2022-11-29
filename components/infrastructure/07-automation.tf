@@ -1,6 +1,6 @@
 data "azurerm_resource_group" "ctsc_rg" {
 }
-resource "azurerm_automation_account" "example" {
+resource "azurerm_automation_account" "ctsc-auto" {
   name                = "ctsc-dgw-automation"
   location            = var.location
   resource_group_name = ctsc_rg.resource_group_name
