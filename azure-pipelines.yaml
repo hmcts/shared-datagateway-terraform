@@ -62,6 +62,7 @@ stages:
               keyvaultName: 'infra-vault-nonprod'
               keyvaultSecret: 'azure-devops-token'
               serviceConnection: 'DCD-CFT-Sandbox'
+              overrideAction: ${{ parameters.overrideAction }}
 
   - ${{ each deployment in parameters.environment_components }}:
       - stage: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
