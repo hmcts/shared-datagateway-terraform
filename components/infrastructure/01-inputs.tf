@@ -133,6 +133,12 @@ variable "sku_name" {
   description = "The SKU name of the account - only Basic is supported at this time"
 }
 
+variable "subnet_service_endpoints" {
+  default = [
+    "Microsoft.Sql"
+  ]
+}
+
 data "azurerm_key_vault" "soc_vault" {
   count    = var.install_splunk_uf ? 1 : 0
   provider = azurerm.soc
