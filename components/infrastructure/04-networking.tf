@@ -24,6 +24,8 @@ resource "azurerm_subnet" "gateway_subnet" {
   resource_group_name  = data.azurerm_virtual_network.vnet_data.resource_group_name
   virtual_network_name = data.azurerm_virtual_network.vnet_data.name
   address_prefixes     = [var.subnet_prefix]
+  service_endpoints    = var.subnet_service_endpoints
+
 }
 
 # Network Security Group
