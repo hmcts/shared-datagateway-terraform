@@ -6,19 +6,19 @@ variable "builtFrom" {
 
 variable "product" {
   type    = string
-  default = "ctsc"
+  default = "shared-datagateway"
 }
 
 variable "project" {
   type    = string
-  default = "ctsc"
+  default = "shared-datagateway"
 }
 
-variable "ctsc_rg_location" {
+variable "shared_dgw_rg_location" {
   type = string
 }
 
-variable "ctsc_rg_name" {
+variable "shared_dgw_rg_name" {
   type = string
 }
 
@@ -59,7 +59,7 @@ variable "vm_storage_account_type" {
 
 variable "vm_admin_user" {
   type        = string
-  description = "ctsc vm admin username, defaults to 'ctscadmin'"
+  description = "shared-dgw vm admin username, defaults to 'shareddgwadmin'"
 }
 
 variable "vm_admin_password" {

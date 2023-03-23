@@ -3,8 +3,8 @@ module "ctsc" {
   location                = var.location
   environment             = var.environment
   rg_name                 = local.rg_name
-  ctsc_rg_location        = azurerm_resource_group.ctsc_rg.location
-  ctsc_rg_name            = azurerm_resource_group.ctsc_rg.name
+  ctsc_rg_location        = azurerm_resource_group.shared-datagateway-rg.location
+  ctsc_rg_name            = azurerm_resource_group.shared-datagateway-rg.name
   subnet_id               = azurerm_subnet.gateway_subnet.id
   vm_zones                = var.vm_zones
   vm_admin_user           = data.azurerm_key_vault_secret.vm_admin_user.value

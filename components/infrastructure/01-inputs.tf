@@ -33,12 +33,12 @@ variable "buildEnv" {
 
 variable "product" {
   type    = string
-  default = "ctsc"
+  default = "shared-datagateway"
 }
 
 variable "project" {
   type    = string
-  default = "ctsc"
+  default = "shared-datagateway"
 }
 
 # Virtual Machine
