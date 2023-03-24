@@ -1,6 +1,6 @@
 # Output - vm provisioned
 output "shared_dgw_vm_name" {
-  description = "Provisioned CTSC vm name"
+  description = "Provisioned Shared DGW vm name"
   value       = toset([for vm in azurerm_windows_virtual_machine.shared_dgw_vm : vm.name])
 }
 
