@@ -17,7 +17,7 @@ data "azurerm_key_vault_secret" "vm_admin_user" {
 }
 
 resource "azurerm_key_vault" "shared-dgw-key-vault" {
-  name                            = format("shared-dgw-%s-%s-kv", var.environment, local.location_abrv)
+  name                            = format("shared-dgw-%s", var.environment)
   location                        = var.location
   resource_group_name             = azurerm_resource_group.shared-datagateway-rg.name
   enabled_for_disk_encryption     = true
@@ -28,5 +28,3 @@ resource "azurerm_key_vault" "shared-dgw-key-vault" {
   sku_name                        = "standard"
   tags                            = local.common_tags
 }
-
-
