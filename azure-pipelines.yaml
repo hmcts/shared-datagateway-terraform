@@ -1,4 +1,4 @@
-name: ctsc-datagateway-terraform
+name: shared-datagateway-terraform
 trigger:
   batch: true
   branches:
@@ -18,7 +18,7 @@ parameters:
     displayName: Component to Run
     type: object
     default:
-      - deployment: "ctsc-datagateway"
+      - deployment: "shared-datagateway"
         environment: "nonprod"
         targetEnvironment: "nonprod"
         resourceGroupName: azure-control-stg-rg
