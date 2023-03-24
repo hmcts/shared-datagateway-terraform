@@ -2,7 +2,7 @@
 data "azurerm_client_config" "current" {}
 
 data "azurerm_key_vault" "shared_dgw_kv" {
-  name                = azurerm_key_vault.shared_dgw_key_vault.name
+  name                = azurerm_key_vault.shared-dgw-key-vault.name
   resource_group_name = azurerm_resource_group.shared-datagateway-rg.name
 }
 
@@ -16,7 +16,7 @@ data "azurerm_key_vault_secret" "vm_admin_user" {
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
 }
 
-resource "azurerm_key_vault" "shared_dgw_key_vault" {
+resource "azurerm_key_vault" "shared-dgw-key-vault" {
   name                            = format("shared-dgw-%s-%s-kv", var.environment, local.location_abrv)
   location                        = var.location
   resource_group_name             = azurerm_resource_group.shared-datagateway-rg.name
