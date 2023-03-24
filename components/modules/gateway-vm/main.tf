@@ -9,8 +9,8 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
   }
 
   name                = "shared-dgw-vm${each.value.vm_count}"
-  resource_group_name = var.shared-dgw_rg_name
-  location            = var.shared-dgw_rg_location
+  resource_group_name = var.shared_dgw_rg_name
+  location            = var.shared_dgw_rg_location
   size                = var.vm_size
   admin_username      = var.vm_admin_user
   admin_password      = var.vm_admin_password
