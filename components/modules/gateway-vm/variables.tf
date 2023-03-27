@@ -1,7 +1,7 @@
 # General
 variable "builtFrom" {
   type    = string
-  default = "hmcts/ctsc-datagateway-terraform"
+  default = "hmcts/shared-datagateway-terraform"
 }
 
 variable "product" {

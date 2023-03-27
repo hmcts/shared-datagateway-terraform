@@ -1,4 +1,4 @@
-module "ctsc" {
+module "shared-dgw" {
   source                  = "../modules/gateway-vm"
   location                = var.location
   environment             = var.environment
