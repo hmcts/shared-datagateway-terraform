@@ -38,7 +38,7 @@ variable "product" {
 
 variable "project" {
   type    = string
-  default = "shared-datagateway"
+  default = "shared-dgw"
 }
 
 # Virtual Machine
