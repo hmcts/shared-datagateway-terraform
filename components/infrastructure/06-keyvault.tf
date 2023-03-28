@@ -30,16 +30,16 @@ resource "azurerm_key_vault" "shared-dgw-key-vault" {
 }
 
 resource "random_password" "admin_password" {
-  length = 16
-  special = true
+  length           = 16
+  special          = true
   override_special = "_$@"
-  depends_on = [azurerm_key_vault.shared-dgw-key-vault]
+  depends_on       = [azurerm_key_vault.shared-dgw-key-vault]
 }
 
 resource "azurerm_key_vault_secret" "vm_password" {
 
-  name = "${var.project}-admin-password"
-  value = random_password.admin_password.result
+  name         = "${var.project}-admin-password"
+  value        = random_password.admin_password.result
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
-  depends_on = [random_password.admin_password]
+  depends_on   = [random_password.admin_password]
 }
