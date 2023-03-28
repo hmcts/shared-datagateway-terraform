@@ -8,7 +8,7 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
     for idx, entry in var.vm_zones : "shared-dgw-vm-${entry.vm_count}" => entry
   }
 
-  name                = "shared-dgw-vm${each.value.vm_count}"
+  name                = format("%s-vm-%s", var.project, each.value.vm_count)
   resource_group_name = var.shared_dgw_rg_name
   location            = var.shared_dgw_rg_location
   size                = var.vm_size
@@ -17,7 +17,7 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
   tags                = var.tags
   zone                = each.value.vm_zone
   network_interface_ids = [
-    azurerm_network_interface.shared_dgw_nic["shared-dgw-nic-${each.value.vm_count}"].id,
+    azurerm_network_interface.shared_dgw_nic["${var.project}-nic-${each.value.vm_count}"].id,
   ]
 
   os_disk {
@@ -49,7 +49,7 @@ module "vm-bootstrap" {
   }
 
   virtual_machine_type       = "vm"
-  virtual_machine_id         = azurerm_windows_virtual_machine.shared_dgw_vm["shared-dgw-vm-${each.value.vm_count}"].id
+  virtual_machine_id         = azurerm_windows_virtual_machine.shared_dgw_vm["${var.project}-vm-${each.value.vm_count}"].id
   splunk_username            = var.splunk_username
   splunk_password            = var.splunk_password
   splunk_pass4symmkey        = var.splunk_pass4symmkey

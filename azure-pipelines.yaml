@@ -23,7 +23,7 @@ parameters:
         targetEnvironment: "nonprod"
         resourceGroupName: azure-control-stg-rg
         dependsOn: "Precheck"
-#      - deployment: "ctsc-datagateway"
+#      - deployment: "shared-datagateway"
 #        environment: "prod"
 #        dependsOn: "Precheck"
   - name: overrideAction
@@ -44,7 +44,7 @@ variables:
   - name: build
     value: $(Build.BuildNumber)
   - name: product
-    value: "shared-dgw"
+    value: "hub"
   - name: terraformInitSubscription
     value: 04d27a32-7a07-48b3-95b8-3c8691e1a263
   - template: vars/input-variables.yaml@cnp-azuredevops-libraries

@@ -7,12 +7,12 @@ data "azurerm_key_vault" "shared_dgw_kv" {
 }
 
 data "azurerm_key_vault_secret" "vm_admin_password" {
-  name         = "shared-dgw-admin-password"
+  name         = "${var.project}-admin-password"
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
 }
 
 data "azurerm_key_vault_secret" "vm_admin_user" {
-  name         = "shared-dgw-admin-user"
+  name         = "${var.project}-admin-user"
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
 }
 

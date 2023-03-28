@@ -4,7 +4,7 @@ resource "azurerm_network_interface" "shared_dgw_nic" {
     for idx, entry in var.vm_zones : "shared-dgw-nic-${entry.vm_count}" => entry
   }
 
-  name                = "shared-datagateway-${local.location_abrv}-nic-${each.value.vm_count}"
+  name                = format("%s-%s-nic-%s", var.project, local.location_abrv, each.value.vm_count)
   location            = var.location
   resource_group_name = var.rg_name
 
