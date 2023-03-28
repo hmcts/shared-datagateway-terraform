@@ -3,7 +3,7 @@ module "shared-dgw" {
   location                = var.location
   environment             = var.environment
   rg_name                 = local.rg_name
-  project = var.project
+  project                 = var.project
   shared_dgw_rg_location  = azurerm_resource_group.shared-datagateway-rg.location
   shared_dgw_rg_name      = azurerm_resource_group.shared-datagateway-rg.name
   subnet_id               = azurerm_subnet.gateway_subnet.id
