@@ -2,6 +2,6 @@
 
 ## About 
 
-Data gateway setup for PowerBI to Postgres for CTSC reporting
+Data gateway setup for PowerBI to Postgres for Shared services
 
 ...,

@@ -20,7 +20,7 @@ data "azurerm_virtual_network" "vnet_data" {
 }
 
 resource "azurerm_subnet" "gateway_subnet" {
-  name                 = "ctsc-data-gateway"
+  name                 = "shared-data-gateway"
   resource_group_name  = data.azurerm_virtual_network.vnet_data.resource_group_name
   virtual_network_name = data.azurerm_virtual_network.vnet_data.name
   address_prefixes     = [var.subnet_prefix]
@@ -29,21 +29,21 @@ resource "azurerm_subnet" "gateway_subnet" {
 }
 
 # Network Security Group
-resource "azurerm_network_security_group" "nsg_ctsc" {
+resource "azurerm_network_security_group" "nsg_shared_dgw" {
   name                = local.nsg_name
-  location            = azurerm_resource_group.ctsc_rg.location
-  resource_group_name = azurerm_resource_group.ctsc_rg.name
+  location            = azurerm_resource_group.shared-datagateway-rg.location
+  resource_group_name = azurerm_resource_group.shared-datagateway-rg.name
   tags                = local.common_tags
 }
 
 # Network Security Group Association
-resource "azurerm_subnet_network_security_group_association" "nsg_ctsc_association" {
+resource "azurerm_subnet_network_security_group_association" "nsg_shared_dgw_association" {
   subnet_id                 = azurerm_subnet.gateway_subnet.id
-  network_security_group_id = azurerm_network_security_group.nsg_ctsc.id
+  network_security_group_id = azurerm_network_security_group.nsg_shared_dgw.id
 }
 
 # Network Security group rule
-resource "azurerm_network_security_rule" "ctsc_nsg_rules" {
+resource "azurerm_network_security_rule" "shared_dgw_nsg_rules" {
   for_each = {
     for rule in local.nsg_security_rules : rule.name => rule
   }
@@ -56,7 +56,7 @@ resource "azurerm_network_security_rule" "ctsc_nsg_rules" {
   destination_port_ranges     = each.value.destination_port_ranges
   source_address_prefixes     = each.value.source_address_prefixes
   destination_address_prefix  = each.value.destination_address_prefix
-  resource_group_name         = azurerm_resource_group.ctsc_rg.name
+  resource_group_name         = azurerm_resource_group.shared-datagateway-rg.name
   network_security_group_name = local.nsg_name
   description                 = each.value.description
 }

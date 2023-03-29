@@ -27,12 +27,12 @@ vm_publisher            = "center-for-internet-security-inc"
 vm_offer                = "cis-windows-server-2022-l2"
 vm_sku                  = "cis-windows-server-2022-l2-gen2"
 vm_version              = "latest"
-vm_size                 = "Standard_D8s_v3"
+vm_size                 = "Standard_D8ds_v5"
 vm_storage_account_type = "StandardSSD_LRS"
 
 # Automation acount
-automation_account_name      = "ctsc-dgw-automation"
-log_analytics_workspace_name = "ctsc-dgw-workspace"
+automation_account_name      = "shared-dgw-automation"
+log_analytics_workspace_name = "shared-dgw-workspace"
 sku_name_workspace           = "PerGB2018"
 log_retention_days           = 30
 sku_name                     = "Basic"

@@ -1,2 +1,2 @@
-# CTCS Data Gateway Virtual machine
+# Shared Data Gateway Virtual machine
 ## TODO:

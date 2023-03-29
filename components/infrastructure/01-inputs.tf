@@ -23,7 +23,7 @@ variable "hub_subscription_id" {
 
 variable "builtFrom" {
   type    = string
-  default = "hmcts/ctsc-datagateway-terraform"
+  default = "hmcts/shared-datagateway-terraform"
 }
 
 variable "buildEnv" {
@@ -33,12 +33,12 @@ variable "buildEnv" {
 
 variable "product" {
   type    = string
-  default = "ctsc"
+  default = "shared-datagateway"
 }
 
 variable "project" {
   type    = string
-  default = "ctsc"
+  default = "shared-dgw"
 }
 
 # Virtual Machine
