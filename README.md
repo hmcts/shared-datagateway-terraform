@@ -4,4 +4,5 @@
 
 Data gateway setup for PowerBI to Postgres for Shared services
 
-...,
+## TODO
+Proper documentation
