@@ -26,7 +26,7 @@ parameters:
       - deployment: "shared-datagateway"
         environment: "prod"
         targetEnvironment: "prod"
-        resourceGroupName: azure-control-stg-rg
+        resourceGroupName: azure-control-prod-rg
         dependsOn: "Precheck"
   - name: overrideAction
     type: string
