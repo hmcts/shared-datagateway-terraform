@@ -45,7 +45,7 @@ variable "rg_name_prod" {
   type = string
 }
 
-variable "rg_name_prod" {
+variable "rg_name_nonprod" {
   type = string
 }
 
