@@ -8,7 +8,7 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
     for idx, entry in var.vm_zones : "shared-dgw-vm-${entry.vm_count}" => entry
   }
 
-  name                = format("%s-vm-%s-%s", var.project, var.environment, each.value.vm_count)
+  name                = var.environment == "prod" ? format("%s-vm-%s-%s", var.project, var.environment, each.value.vm_count) : format("%s-vm-%s", var.project, each.value.vm_count)
   resource_group_name = var.shared_dgw_rg_name
   location            = var.shared_dgw_rg_location
   size                = var.vm_size
