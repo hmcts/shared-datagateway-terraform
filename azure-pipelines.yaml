@@ -23,9 +23,11 @@ parameters:
         targetEnvironment: "nonprod"
         resourceGroupName: azure-control-stg-rg
         dependsOn: "Precheck"
-#      - deployment: "shared-datagateway"
-#        environment: "prod"
-#        dependsOn: "Precheck"
+      - deployment: "shared-datagateway"
+        environment: "prod"
+        targetEnvironment: "prod"
+        resourceGroupName: azure-control-stg-rg
+        dependsOn: "Precheck"
   - name: overrideAction
     type: string
     default: plan

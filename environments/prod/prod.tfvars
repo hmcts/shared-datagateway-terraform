@@ -22,7 +22,7 @@ cnp_vault_sub     = "1c4f0704-a29e-403d-b719-b90c34ef14c9"
 # Nessus
 nessus_install  = true
 nessus_server   = "nessus-scanners-prod000005.platform.hmcts.net"
-nessus_groups   = "Nonprod-test"
+nessus_groups   = "Prod-test"
 nessus_key_name = "nessus-agent-key-prod"
 
 # VM SKU
