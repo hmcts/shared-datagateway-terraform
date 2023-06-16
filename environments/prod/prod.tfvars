@@ -2,7 +2,7 @@ subnet_prefix       = "10.11.8.224/28"
 hub_subscription_id = "0978315c-75fe-4ada-9d11-1eb5e0e0b214"
 environment         = "prod"
 infra_hub_suffix    = "prod-int"
-buildEnv            = "production"
+buildEnv            = "prod"
 vm_zones = [
   {
     vm_count = 0,
