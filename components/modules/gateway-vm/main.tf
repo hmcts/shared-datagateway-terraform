@@ -44,10 +44,11 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
 module "vm-bootstrap" {
   source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=master"
 
-  for_each = azurerm_windows_virtual_machine.shared_dgw_vm
-
+  for_each = {
+        for idx, entry in var.vm_zones : "shared-dgw-bootstrap-${entry.vm_count}" => entry
+  }
   virtual_machine_type       = "vm"
-  virtual_machine_id         = each.value.id
+  virtual_machine_id         = azurerm_windows_virtual_machine.shared_dgw_vm["${var.project}-vm-${each.value.vm_count}"].id
   splunk_username            = var.splunk_username
   splunk_password            = var.splunk_password
   splunk_pass4symmkey        = var.splunk_pass4symmkey
