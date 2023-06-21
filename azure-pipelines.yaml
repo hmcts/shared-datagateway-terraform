@@ -23,9 +23,11 @@ parameters:
         targetEnvironment: "nonprod"
         resourceGroupName: azure-control-stg-rg
         dependsOn: "Precheck"
-#      - deployment: "shared-datagateway"
-#        environment: "prod"
-#        dependsOn: "Precheck"
+      - deployment: "shared-datagateway"
+        environment: "prod"
+        targetEnvironment: "prod"
+        resourceGroupName: azure-control-prod-rg
+        dependsOn: "Precheck"
   - name: overrideAction
     type: string
     default: plan
@@ -45,6 +47,8 @@ variables:
     value: $(Build.BuildNumber)
   - name: product
     value: "hub"
+  - name: location
+    value: "uksouth"
   - name: terraformInitSubscription
     value: 04d27a32-7a07-48b3-95b8-3c8691e1a263
   - template: vars/input-variables.yaml@cnp-azuredevops-libraries
@@ -65,8 +69,8 @@ stages:
               overrideAction: ${{ parameters.overrideAction }}
 
   - ${{ each deployment in parameters.environment_components }}:
-      - stage: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
-        displayName: Infrastucture_${{ replace(deployment.location, ' ', '_') }}_${{ deployment.environment }}
+      - stage: Infrastucture_${{ replace(variables.location, ' ', '_') }}_${{ deployment.environment }}
+        displayName: Infrastucture_${{ replace(variables.location, ' ', '_') }}_${{ deployment.environment }}
         condition: succeeded()
         jobs:
           - job: TerraformPlanApply

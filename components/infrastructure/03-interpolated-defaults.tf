@@ -1,9 +1,11 @@
 # General
 locals {
-  location_abrv = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
-  rg_name       = "${var.project}-${local.location_abrv}-rg"
-  common_tags   = module.ctags.common_tags
-  nsg_name      = format("%s-%s-%s-nsg", var.project, var.environment, local.location_abrv)
+  location_abrv   = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
+  rg_name_nonprod = "${var.project}-${local.location_abrv}-rg"
+  rg_name_prod    = "${var.project}-${local.location_abrv}-${var.environment}-rg"
+  rg_name         = var.environment == "prod" ? local.rg_name_prod : local.rg_name_nonprod
+  common_tags     = module.ctags.common_tags
+  nsg_name        = format("%s-%s-%s-nsg", var.project, var.environment, local.location_abrv)
   nsg_security_rules = [
     {
       name                       = "AllowAnyCustomOutbound"
