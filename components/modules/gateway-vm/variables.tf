@@ -154,7 +154,7 @@ variable "nessus_groups" {
   type = string
 }
 
-variable "prd_vm_name" {
+variable "prod_vm_name" {
   type    = string
   default = "shared-gw-prd"
 }
