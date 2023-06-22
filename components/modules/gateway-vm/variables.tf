@@ -154,6 +154,11 @@ variable "nessus_groups" {
   type = string
 }
 
+variable "prd_vm_name" {
+  type    = string
+  default = "shared-gw-prd"
+}
+
 # Locals
 locals {
   location_abrv        = lower(join("", regex("^([a-zA-Z]+).*\\s([a-zA-Z])[a-zA-Z]+$", var.location)))
