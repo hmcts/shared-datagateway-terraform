@@ -138,7 +138,10 @@ variable "subnet_service_endpoints" {
     "Microsoft.Sql"
   ]
 }
-
+variable "vm_scale_sets" {
+  description = "The VM Scale sets configuration variable"
+  default     = {}
+}
 data "azurerm_key_vault" "soc_vault" {
   count    = var.install_splunk_uf ? 1 : 0
   provider = azurerm.soc
