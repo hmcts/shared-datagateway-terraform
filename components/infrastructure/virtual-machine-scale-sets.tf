@@ -29,5 +29,6 @@ module "windows-vm-ss" {
   nessus_groups              = var.nessus_groups
   install_dynatrace_oneagent = false
   install_azure_monitor      = false
+  systemassigned_identity    = true
   tags                       = module.ctags.common_tags
 }
