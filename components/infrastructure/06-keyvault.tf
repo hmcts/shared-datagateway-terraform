@@ -47,11 +47,11 @@ resource "azurerm_key_vault_secret" "vm_password_secret" {
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
 }
 
-resource "azurerm_key_vault_access_policy" "identity_access" {
-  for_each           = var.vm_scale_sets
-  key_vault_id       = data.azurerm_key_vault.shared_dgw_kv.id
-  tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = module.windows-vm-ss[each.key].principal_id
-  secret_permissions = ["Get", "Set", "List"]
-  depends_on         = [module.windows-vm-ss]
-}
+# resource "azurerm_key_vault_access_policy" "identity_access" {
+#   for_each           = var.vm_scale_sets
+#   key_vault_id       = data.azurerm_key_vault.shared_dgw_kv.id
+#   tenant_id          = data.azurerm_client_config.current.tenant_id
+#   object_id          = module.windows-vm-ss[each.key].principal_id
+#   secret_permissions = ["Get", "Set", "List"]
+#   depends_on         = [module.windows-vm-ss]
+# }
