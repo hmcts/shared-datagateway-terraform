@@ -18,7 +18,7 @@ module "windows-vm-ss" {
   managed_disks              = each.value.managed_disks
   kv_name                    = azurerm_key_vault.shared-dgw-key-vault.name
   kv_rg_name                 = azurerm_resource_group.shared-datagateway-rg.name
-  encrypt_ADE                = true
+  encrypt_ADE                = false
   install_splunk_uf          = var.install_splunk_uf
   splunk_username            = try(data.azurerm_key_vault_secret.splunk_username[0].value, null)
   splunk_password            = try(data.azurerm_key_vault_secret.splunk_password[0].value, null)
