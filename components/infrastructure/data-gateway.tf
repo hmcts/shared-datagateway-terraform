@@ -7,7 +7,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
   type_handler_version         = "1.1"
   auto_upgrade_minor_version   = true
   protected_settings = jsonencode({
-    script = compact(tolist([templatefile("${path.module}/scripts/setup.ps1", {
+    script = compact(tolist([templatefile("${path.module}/scripts/gw_install.ps1", {
       Connect_Username    = local.moj_username
       Connect_Password    = local.moj_password
       TenantId            = local.moj_tenant_id
