@@ -31,11 +31,5 @@ module "windows-vm-ss" {
   install_azure_monitor      = false
   systemassigned_identity    = true
   upgrade_mode               = "Automatic"
-  automatic_os_upgrade_policy = {
-    policy = {
-      disable_automatic_rollback  = true,
-      enable_automatic_os_upgrade = true
-    }
-  }
-  tags = module.ctags.common_tags
+  tags                       = module.ctags.common_tags
 }
