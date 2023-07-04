@@ -41,7 +41,7 @@ $credentials = New-Object System.Management.Automation.PSCredential -ArgumentLis
 $progressMsg = "Connect to the Data Gateway Service"
 # $logger.Log($progressMsg)
 Write-Host($progressMsg)
-$connected = (Connect-DataGatewayServiceAccount -Credential $credentials -Tenant $TenantId)
+$connected = (Connect-DataGatewayServiceAccount)
 if ($null -eq $connected) {
     # Surface last error detail
     $lastError = Resolve-DataGatewayError -Last
