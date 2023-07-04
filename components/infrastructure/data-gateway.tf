@@ -16,7 +16,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
       GatewayName         = local.gatewayname
       GatewayAdminUserIds = local.gateway_admin_ids
 
-    })]))
+    }), "${path.module}/scripts/test_ps_script.ps1"]))
   })
   depends_on = [module.windows-vm-ss]
 }

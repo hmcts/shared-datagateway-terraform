@@ -1,12 +1,12 @@
 
-$Connect_Username = ${Connect_Username}
-$Connect_Password = ${Connect_Password}
-$TenantId = ${TenantId}
+$Connect_Username = "${Connect_Username}"
+$Connect_Password = "${Connect_Password}"
+$TenantId = "${TenantId}"
 $InstallerLocation="GatewayInstall.exe"
-$InstanceName = = ${InstanceName}
-$RecoveryKey = ${RecoveryKey}
-$GatewayName = ${GatewayName}
-$GatewayAdminUserIds = = ${GatewayAdminUserIds}
+$InstanceName =  "${InstanceName}"
+$RecoveryKey = "${RecoveryKey}"
+$GatewayName = "${GatewayName}"
+$GatewayAdminUserIds =  "${GatewayAdminUserIds}"
 
 
 # Import log utils
