@@ -13,10 +13,10 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
       TenantId            = local.moj_tenant_id
       InstanceName        = data.external.bash_script[each.key].result.instance_name
       RecoveryKey         = local.recoverykey
-      GatewayName         = local.gatewayname
+      GatewayName         = format("%s(%s)", local.gatewayname, each.value.regionkey)
       GatewayAdminUserIds = local.gateway_admin_ids
-
-    }), templatefile("${path.module}/scripts/test_ps_script.ps1", { Connect_Username = local.moj_username })]))
+      RegionKey           = each.value.regionkey
+    })]))
   })
   depends_on = [module.windows-vm-ss]
 }
@@ -26,7 +26,7 @@ locals {
   moj_password      = data.azurerm_key_vault_secret.moj_account_password.value
   moj_tenant_id     = "c6874728-71e6-41fe-a9e1-2e8c36776ad8"
   recoverykey       = data.azurerm_key_vault_secret.power_bi_data_gw_recoverykey.value
-  gatewayname       = "MOJ Power BI Data Gateway"
+  gatewayname       = "Data Gateway"
   gateway_admin_ids = "ca9f7d19-f173-4fd2-ac7e-5f8de7af5113,f77fc581-741c-4d66-a778-38ee8ee2d88d" # testing with Alex, Brendon MOJ object IDs
 
 

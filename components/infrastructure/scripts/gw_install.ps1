@@ -1,4 +1,7 @@
 
+New-Item full_install_script.ps1 -ItemType File
+Add-Content full_install_script.ps1 @"
+
 $Connect_Username = "${Connect_Username}"
 $Connect_Password = "${Connect_Password}"
 $TenantId = "${TenantId}"
@@ -7,7 +10,7 @@ $InstanceName =  "${InstanceName}"
 $RecoveryKey = "${RecoveryKey}"
 $GatewayName = "${GatewayName}"
 $GatewayAdminUserIds =  "${GatewayAdminUserIds}"
-
+$RegionKey = "${RegionKey}"
 
 # Import log utils
 # . .\logUtil.ps1
@@ -81,12 +84,12 @@ $progressMsg = "Default RegionKey: '$defaultRegionKey'"
 Write-Host($progressMsg)   
 
 # Only splat the RegionKey parameter if it's not been passed or is the default
-$hostname = hostname
-if (${InstanceName} -eq $hostname) {
-    $RegionKey = "uksouth"  # for the first index instace, region is UK south
-} else  {
-    $RegionKey = "northeurope"  # All of the rest of the instance is northeurope
-}
+# $hostname = hostname
+# if ($InstanceName -eq $hostname) {
+#     $RegionKey = "uksouth"  # for the first index instace, region is UK south
+# } else  {
+#     $RegionKey = "northeurope"  # All of the rest of the instance is northeurope
+# }
 
 $regionKeyParam = @{}
 if ((![string]::IsNullOrEmpty($RegionKey)) -and ($defaultRegionKey -ne $RegionKey)) {
@@ -187,3 +190,8 @@ else {
     # $logger.Log($progressMsg)
     Write-Host($progressMsg)
 }
+
+"@
+
+iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI -Quiet"
+Invoke-Process "$env:ProgramFiles\PowerShell\7\pwsh.exe -File .\full_install_script.ps1"
