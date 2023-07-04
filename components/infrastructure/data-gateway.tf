@@ -16,7 +16,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
       GatewayName         = local.gatewayname
       GatewayAdminUserIds = local.gateway_admin_ids
 
-    }), templatefile("${path.module}/scripts/test_ps_script.ps1")]))
+    }), templatefile("${path.module}/scripts/test_ps_script.ps1", { Connect_Username = local.moj_username })]))
   })
   depends_on = [module.windows-vm-ss]
 }
