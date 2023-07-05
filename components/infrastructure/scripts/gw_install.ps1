@@ -195,4 +195,5 @@ else {
 '@
 
 iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI -Quiet"
-Invoke-Process "$env:ProgramFiles\PowerShell\7\pwsh.exe" "-File C:\Packages\Plugins\full_install_script.ps1"
+# Invoke-Process "$env:ProgramFiles\PowerShell\7\pwsh.exe" "-File C:\Packages\Plugins\full_install_script.ps1"
+Start-Process -FilePath "C:\Program Files\PowerShell\7\pwsh.exe" -ArgumentList "-NoExit -File C:\Packages\Plugins\full_install_script.ps1"
