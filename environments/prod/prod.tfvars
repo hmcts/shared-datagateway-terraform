@@ -25,6 +25,10 @@ nessus_server   = "nessus-scanners-prod000005.platform.hmcts.net"
 nessus_groups   = "Prod-test"
 nessus_key_name = "nessus-agent-key-prod"
 
+# Dynatrace for prod
+dynatrace_tenant_id = "ebe20728"
+dynatrace_server    = "https://10.10.70.30:9999/e/ebe20728/api"
+
 # VM SKU
 vm_publisher_name       = "MicrosoftWindowsServer"
 vm_publisher            = "center-for-internet-security-inc"
