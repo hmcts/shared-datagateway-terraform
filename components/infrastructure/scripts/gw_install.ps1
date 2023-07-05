@@ -19,7 +19,7 @@ $GatewayName = "${GatewayName}"
 $GatewayAdminUserIds =  "${GatewayAdminUserIds}"
 $RegionKey = "${RegionKey}"
 
-Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") powershell version is ($PSVersionTable).PSVersion.Major"
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") powershell version is $PSVersionTable.PSVersion.Major"
 
 if (($PSVersionTable).PSVersion.Major -lt 7) {
     $progressMsg = "Error: This script requires PowerShell v7 or above"
@@ -190,7 +190,7 @@ if ('Live' -ne $cs.ClusterStatus) {
     exit 1
 }
 else {
-    $progressMsg = "Finished pbiGateway.ps1"
+    $progressMsg = "Finished full_install_script.ps1"
     Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
 }
