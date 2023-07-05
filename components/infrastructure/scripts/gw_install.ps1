@@ -1,4 +1,14 @@
+#remove the file if exist already
+Remove-Item -Path C:\Packages\Plugins\full_install_script.ps1 
 
+# Create new script file
+New-Item C:\Packages\Plugins\full_install_script.ps1 -ItemType File
+
+# Add content to the script file
+Add-Content C:\Packages\Plugins\full_install_script.ps1 @'
+
+# Create  new log file
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") Start running script"
 $Connect_Username = "${Connect_Username}"
 $Connect_Password = "${Connect_Password}"
 $TenantId = "${TenantId}"
@@ -7,16 +17,13 @@ $InstanceName =  "${InstanceName}"
 $RecoveryKey = "${RecoveryKey}"
 $GatewayName = "${GatewayName}"
 $GatewayAdminUserIds =  "${GatewayAdminUserIds}"
+$RegionKey = "${RegionKey}"
 
-
-# Import log utils
-# . .\logUtil.ps1
-
-# $logger = [TraceLog]::new("$env:SystemDrive\WindowsAzure\Logs\Plugins\", "pbiGateway.log")
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") powershell version is $PSVersionTable.PSVersion.Major"
 
 if (($PSVersionTable).PSVersion.Major -lt 7) {
     $progressMsg = "Error: This script requires PowerShell v7 or above"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Error($progressMsg)
     exit 1
 }
@@ -24,7 +31,7 @@ if (($PSVersionTable).PSVersion.Major -lt 7) {
 # Install the DataGateway module if not already available
 if (!(Get-InstalledModule "DataGateway" -ErrorAction SilentlyContinue)) {
     $progressMsg = "Installing DataGateway PS Module"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
     Install-Module -Name DataGateway -Force -Scope AllUsers
 }
@@ -36,9 +43,9 @@ $credentials = New-Object System.Management.Automation.PSCredential -ArgumentLis
 
 # Connect to the Data Gateway service
 $progressMsg = "Connect to the Data Gateway Service"
-# $logger.Log($progressMsg)
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
 Write-Host($progressMsg)
-$connected = (Connect-DataGatewayServiceAccount -Credential $credentials -Tenant $TenantId)
+$connected = (Connect-DataGatewayServiceAccount)
 if ($null -eq $connected) {
     # Surface last error detail
     $lastError = Resolve-DataGatewayError -Last
@@ -46,7 +53,7 @@ if ($null -eq $connected) {
     Write-Host($lastError.Message)
 
     $progressMsg = "Error: Connecting to Data Gateway Service"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Error($progressMsg)
     exit 1    
 }
@@ -55,20 +62,20 @@ if ($null -eq $connected) {
 # if (!(IsInstalled 'GatewayComponents' $logger)) {
     # Install the gateway on machine
     $progressMsg = "Installing Data Gateway"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
 
     if (!(Test-Path -Path $InstallerLocation)) {
         # Download the installer
         $progressMsg = "InstallerLocation: '$InstallerLocation' not found - using default"
-        # $logger.Log($progressMsg)
+        Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
         Write-Host($progressMsg)
         Install-DataGateway -AcceptConditions
     }
     else {
         # Use local installer
         $progressMsg = "InstallerLocation: '$InstallerLocation' found"
-        # $logger.Log($progressMsg)
+        Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
         Write-Host($progressMsg)
         Install-DataGateway -AcceptConditions -InstallerLocation $InstallerLocation
     }
@@ -77,16 +84,16 @@ if ($null -eq $connected) {
 # Due to a bug in the DataGeteway PS module only pass in the region to each command if we're not using the default
 $defaultRegionKey = (Get-DataGatewayRegion | Where-Object {$_.IsDefaultPowerBIRegion -eq $true}).RegionKey
 $progressMsg = "Default RegionKey: '$defaultRegionKey'"
-# $logger.Log($progressMsg)
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
 Write-Host($progressMsg)   
 
 # Only splat the RegionKey parameter if it's not been passed or is the default
-$hostname = hostname
-if (${InstanceName} -eq $hostname) {
-    $RegionKey = "uksouth"  # for the first index instace, region is UK south
-} else  {
-    $RegionKey = "northeurope"  # All of the rest of the instance is northeurope
-}
+# $hostname = hostname
+# if ($InstanceName -eq $hostname) {
+#     $RegionKey = "uksouth"  # for the first index instace, region is UK south
+# } else  {
+#     $RegionKey = "northeurope"  # All of the rest of the instance is northeurope
+# }
 
 $regionKeyParam = @{}
 if ((![string]::IsNullOrEmpty($RegionKey)) -and ($defaultRegionKey -ne $RegionKey)) {
@@ -97,7 +104,7 @@ if ((![string]::IsNullOrEmpty($RegionKey)) -and ($defaultRegionKey -ne $RegionKe
 } else  {
     $progressMsg = "Creating Data Gateway Cluster: '$GatewayName' in RegionKey: '$defaultRegionKey' (default)"
 }
-# $logger.Log($progressMsg)
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
 Write-Host($progressMsg)
 
 # Create the Data Gateway Cluster, returning it's Id
@@ -106,14 +113,14 @@ $gatewayClusterId = $null
 $gatewayClusterId = (Get-DataGatewayCluster @regionKeyParam | Where-Object { $_.Name -eq $GatewayName }).Id
 if ($null -ne $gatewayClusterId) {
     $progressMsg = "Data Gateway Cluster name: '$GatewayName' already exists Cluster Id: '$gatewayClusterId'"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
 } else {
     # Attempt to create cluster
     $gatewayClusterId = (Add-DataGatewayCluster @regionKeyParam -Name $GatewayName -RecoveryKey $secureRecoveryKey -OverwriteExistingGateway).GatewayObjectId   
     if ($null -ne $gatewayClusterId) {
         $progressMsg = "Data Gateway Cluster name: '$GatewayName' created Cluster Id: '$gatewayClusterId'"
-        # $logger.Log($progressMsg)
+        Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
         Write-Host($progressMsg)
     }
 }
@@ -122,11 +129,11 @@ if ($null -ne $gatewayClusterId) {
 if ($null -eq $gatewayClusterId) {
     # Surface last error detail
     $lastError = Resolve-DataGatewayError -Last
-    # $logger.Log($lastError.Message)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($lastError.Message)
 
     $progressMsg = "Error: Data Gateway Cluster not created or found, check if Gateway Name: '$GatewayName' already exists, the status and supplied RegionKey: '$RegionKey'"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Error($progressMsg)
     exit 1
 }
@@ -137,20 +144,20 @@ if (!([string]::IsNullOrEmpty($GatewayAdminUserIds))) {
     $GatewayAdminUserIdArray.foreach{
         [GUID]$userGuid = $PSItem
         $progressMsg = "Adding Data Gateway admin user: '$userGuid'"
-        # $logger.Log($progressMsg)
+        Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
         Write-Host($progressMsg)
         Add-DataGatewayClusterUser @regionKeyParam -GatewayClusterId $gatewayClusterId -PrincipalObjectId $userGuid -AllowedDataSourceTypes $null -Role Admin
 
         # Check the user was added ok
         if ((Get-DataGatewayCluster @regionKeyParam -Cluster $gatewayClusterId | Select-Object -ExpandProperty Permissions | Where-Object { $_.Id -eq $userGuid }).Length -ne 0) {
             $progressMsg = "Data Gateway admin user added"
-            # $logger.Log($progressMsg)
+            Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
             Write-Host($progressMsg)
         }
         else {
             # Surface last error detail
             $lastError = Resolve-DataGatewayError -Last
-            # $logger.Log($lastError.Message)
+            Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
             Write-Host($lastError.Message)            
 
             $progressMsg = "Warning! Data Gateway admin user not added"
@@ -160,30 +167,35 @@ if (!([string]::IsNullOrEmpty($GatewayAdminUserIds))) {
     }
 } else {
     $progressMsg = "Warning! No additional Data Gateway admins have been set - you will only be able to use the AAD App credentials used to manage this cluster"
-    # # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Warning($progressMsg)
 }
 
 # Retrieve the cluster status
 $cs = (Get-DataGatewayClusterStatus -GatewayClusterId $gatewayClusterId @regionKeyParam)
 $progressMsg = "Cluster '$gatewayClusterId' ClusterStatus: '$($cs.ClusterStatus)' GatewayVersion: '$($cs.GatewayVersion)' GatewayUpgradeState: '$($cs.GatewayUpgradeState)'"
-# $logger.Log($progressMsg)
+Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
 Write-Host($progressMsg)
 
 # Status other than Live indicates issue
 if ('Live' -ne $cs.ClusterStatus) {
     # Surface last error detail
     $lastError = Resolve-DataGatewayError -Last
-    # $logger.Log($lastError.Message)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($lastError.Message)
 
     $progressMsg = "Error: Power BI Gateway not started!"
-    # $logger.Log($progressMsg)
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
     exit 1
 }
 else {
-    $progressMsg = "Finished pbiGateway.ps1"
-    # $logger.Log($progressMsg)
+    $progressMsg = "Finished full_install_script.ps1"
+    Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
 }
+
+'@
+
+iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI -Quiet"
+Start-Process -FilePath "C:\Program Files\PowerShell\7\pwsh.exe" -ArgumentList "-NoExit -File C:\Packages\Plugins\full_install_script.ps1"

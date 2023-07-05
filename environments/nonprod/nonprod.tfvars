@@ -41,6 +41,7 @@ sku_name                     = "Basic"
 
 vm_scale_sets = {
   data-gw-vmss-nonprod-uksouth = {
+    regionkey            = "uksouth"
     vm_sku               = "Standard_D4ds_v5"
     vm_availabilty_zones = ["1"]
     vm_instances         = 2
@@ -62,6 +63,7 @@ vm_scale_sets = {
   },
 
   data-gw-vmss-nonprod-northeu = {
+    regionkey            = "northeurope"
     vm_sku               = "Standard_D4ds_v5"
     vm_availabilty_zones = ["1"]
     vm_instances         = 2
