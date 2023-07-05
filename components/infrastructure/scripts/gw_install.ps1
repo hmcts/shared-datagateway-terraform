@@ -1,6 +1,7 @@
 
 New-Item C:\Packages\Plugins\full_install_script.ps1 -ItemType File
-Add-Content C:\Packages\Plugins\full_install_script.ps1 @"
+Add-Content C:\Packages\Plugins\full_install_script.ps1 @'
+
 
 $Connect_Username = "${Connect_Username}"
 $Connect_Password = "${Connect_Password}"
@@ -191,7 +192,7 @@ else {
     Write-Host($progressMsg)
 }
 
-"@
+'@
 
 iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI -Quiet"
 Invoke-Process "$env:ProgramFiles\PowerShell\7\pwsh.exe" "-File C:\Packages\Plugins\full_install_script.ps1"
