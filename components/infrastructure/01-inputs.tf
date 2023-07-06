@@ -189,3 +189,15 @@ data "azurerm_key_vault_secret" "nessus_key" {
   name         = var.nessus_key_name
   key_vault_id = data.azurerm_key_vault.soc_vault2[0].id
 }
+
+variable "dynatrace_tenant_id" {
+  description = "The ID of the Dynatrace tenant"
+  type        = string
+  default     = ""
+}
+
+variable "dynatrace_server" {
+  description = "The Dynatrace server address"
+  type        = string
+  default     = ""
+}

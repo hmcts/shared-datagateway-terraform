@@ -16,14 +16,18 @@ vm_zones = [
 
 # Splunk
 install_splunk_uf = true
-cnp_vault_rg      = "cnp-core-infra"
-cnp_vault_sub     = "1c4f0704-a29e-403d-b719-b90c34ef14c9"
+cnp_vault_rg      = "core-infra-prod"
+cnp_vault_sub     = "8999dec3-0104-4a27-94ee-6588559729d1"
 
 # Nessus
 nessus_install  = true
 nessus_server   = "nessus-scanners-prod000005.platform.hmcts.net"
 nessus_groups   = "Prod-test"
 nessus_key_name = "nessus-agent-key-prod"
+
+# Dynatrace for prod
+dynatrace_tenant_id = "ebe20728"
+dynatrace_server    = "https://10.10.70.30:9999/e/ebe20728/api"
 
 # VM SKU
 vm_publisher_name       = "MicrosoftWindowsServer"
