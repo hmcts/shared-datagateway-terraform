@@ -9,8 +9,8 @@ Add-Content C:\Packages\Plugins\full_install_script.ps1 @'
 
 # Create  new log file
 Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") Start running script"
-$Connect_Username = "${Connect_Username}"
-$Connect_Password = "${Connect_Password}"
+$App_Id = "${App_Id}"
+$App_Secret = "${App_Secret}"
 $TenantId = "${TenantId}"
 $InstallerLocation="GatewayInstall.exe"
 $InstanceName =  "${InstanceName}"
@@ -36,16 +36,15 @@ if (!(Get-InstalledModule "DataGateway" -ErrorAction SilentlyContinue)) {
     Install-Module -Name DataGateway -Force -Scope AllUsers
 }
 
-$secureUserPassword = ConvertTo-SecureString $Connect_Password -AsPlainText
+$secureAppSecret = ConvertTo-SecureString $App_Secret -AsPlainText
 $secureRecoveryKey = ConvertTo-SecureString $RecoveryKey -AsPlainText
 
-$credentials = New-Object System.Management.Automation.PSCredential -ArgumentList @($Connect_Username, $secureUserPassword)
 
 # Connect to the Data Gateway service
 $progressMsg = "Connect to the Data Gateway Service"
 Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
 Write-Host($progressMsg)
-$connected = (Connect-DataGatewayServiceAccount)
+$connected = (Connect-DataGatewayServiceAccount  -ApplicationId $App_Id -ClientSecret $secureAppSecret -Tenant $TenantId)
 if ($null -eq $connected) {
     # Surface last error detail
     $lastError = Resolve-DataGatewayError -Last
