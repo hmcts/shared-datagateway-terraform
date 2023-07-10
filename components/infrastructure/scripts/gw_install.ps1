@@ -36,6 +36,16 @@ if (!(Get-InstalledModule "DataGateway" -ErrorAction SilentlyContinue)) {
     Install-Module -Name DataGateway -Force -Scope AllUsers
 }
 
+
+# Install Npgsql-4.0.10.msi for postgressql database connection
+
+$url = "https://github.com/npgsql/npgsql/releases/download/v4.0.10/Npgsql-4.0.10.msi"
+$output = "C:\Users\Public\Downloads\Npgsql-4.0.10.msi"
+Invoke-WebRequest -Uri $url -OutFile $output
+$arguments = "/i ""$output"" /quiet"
+Start-Process msiexec.exe -ArgumentList $arguments -Wait
+
+
 $secureAppSecret = ConvertTo-SecureString $App_Secret -AsPlainText
 $secureRecoveryKey = ConvertTo-SecureString $RecoveryKey -AsPlainText
 
