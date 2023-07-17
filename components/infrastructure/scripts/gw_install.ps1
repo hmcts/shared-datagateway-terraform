@@ -98,11 +98,7 @@ Write-Host($progressMsg)
 
 # Only splat the RegionKey parameter if it's not been passed or is the default
 $hostname = hostname
-# if ($InstanceName -eq $hostname) {
-#     $RegionKey = "uksouth"  # for the first index instace, region is UK south
-# } else  {
-#     $RegionKey = "northeurope"  # All of the rest of the instance is northeurope
-# }
+
 
 $regionKeyParam = @{}
 if ((![string]::IsNullOrEmpty($RegionKey)) -and ($defaultRegionKey -ne $RegionKey)) {
@@ -120,7 +116,7 @@ Write-Host($progressMsg)
 # First check if this cluster already exists & get its ClusterId (not GatewayId)
 $gatewayClusterId = $null
 $gatewayClusterId = (Get-DataGatewayCluster @regionKeyParam | Where-Object { $_.Name -eq $GatewayName }).Id
-if (($null -ne $gatewayClusterId) -and ($InstanceName -ne $hostname)) {
+if (($null -ne $gatewayClusterId) -OR ($InstanceName -ne $hostname)) {
     $progressMsg = "Data Gateway Cluster name: '$GatewayName' already exists Cluster Id: '$gatewayClusterId'"
     Add-Content -Path C:\Packages\Plugins\gateway_log.txt -Value "$(Get-Date -Format "dd/MM/yyyy HH:mm:ss") $progressMsg"
     Write-Host($progressMsg)
