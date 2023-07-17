@@ -44,3 +44,52 @@ log_analytics_workspace_name = "shared-dgw-prod-workspace"
 sku_name_workspace           = "PerGB2018"
 log_retention_days           = 30
 sku_name                     = "Basic"
+
+# VM Scale-Sets
+
+vm_scale_sets = {
+  data-gw-vmss-prod-uksouth = {
+    regionkey            = "uksouth"
+    vm_sku               = "Standard_D4ds_v5"
+    vm_availabilty_zones = ["1"]
+    vm_instances         = 2
+    network_interfaces = {
+      nic0 = { name = "data-gw-vmss-prod-uksouth-nic",
+        primary        = true,
+        ip_config_name = "data-gw-vmss-prod-uksouth-ipconfig",
+      }
+    }
+    managed_disks = {
+      datadisk01 = {
+        storage_account_type = "Standard_LRS"
+        disk_create_option   = "Empty"
+        disk_size_gb         = "128"
+        disk_lun             = "10"
+        disk_caching         = "ReadWrite"
+      }
+    }
+  },
+
+  data-gw-vmss-prod-northeu = {
+    regionkey            = "northeurope"
+    vm_sku               = "Standard_D4ds_v5"
+    vm_availabilty_zones = ["1"]
+    vm_instances         = 2
+    network_interfaces = {
+      nic0 = { name = "data-gw-vmss-prod-northeu-nic",
+        primary        = true,
+        ip_config_name = "data-gw-vmss-prod-northeu-ipconfig",
+      }
+    }
+    managed_disks = {
+      datadisk01 = {
+        storage_account_type = "Standard_LRS"
+        disk_create_option   = "Empty"
+        disk_size_gb         = "128"
+        disk_lun             = "10"
+        disk_caching         = "ReadWrite"
+      }
+    }
+  }
+
+}
