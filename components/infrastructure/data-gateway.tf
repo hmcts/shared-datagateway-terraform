@@ -26,8 +26,8 @@ locals {
   app_secret        = data.azurerm_key_vault_secret.platops_powerbi_datagateway_secret.value
   moj_tenant_id     = "c6874728-71e6-41fe-a9e1-2e8c36776ad8"
   recoverykey       = data.azurerm_key_vault_secret.power_bi_data_gw_recoverykey.value
-  gatewayname       = "Data Gateway"
-  gateway_admin_ids = "ca9f7d19-f173-4fd2-ac7e-5f8de7af5113,f77fc581-741c-4d66-a778-38ee8ee2d88d,0ee17f07-7e5a-4243-9572-59de31b4ffb6,88000147-94ef-427a-a194-61d56aa78a77" # testing with Alex, Brendon, Chirag, Nitesh MOJ object IDs
+  gatewayname       = "${var.environment}-data-gateway"
+  gateway_admin_ids = "ca9f7d19-f173-4fd2-ac7e-5f8de7af5113,f77fc581-741c-4d66-a778-38ee8ee2d88d,0ee17f07-7e5a-4243-9572-59de31b4ffb6,88000147-94ef-427a-a194-61d56aa78a77,32670ad9-e3b3-4807-8df6-418e5b69926b"
 }
 
 
