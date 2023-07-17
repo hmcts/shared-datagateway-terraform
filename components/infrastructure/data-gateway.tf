@@ -33,12 +33,9 @@ locals {
 
 data "external" "bash_script" {
   for_each   = var.vm_scale_sets
-  program    = ["bash", "${path.module}/scripts/get_instance_name.bash", local.rg_name, each.key]
+  program    = ["bash", "${path.module}/scripts/get_instance_name.bash", local.rg_name, each.key, var.hub_subscription_id]
   depends_on = [module.windows-vm-ss]
 }
-# This can output this instance_name     = data.external.bash_script[each.key].instance_name
-# kv_name           = azurerm_key_vault.shared-dgw-key-vault.name
-# vm_resource_group = local.rg_name
 
 data "azurerm_key_vault_secret" "platops_powerbi_datagateway_secret" {
   name         = "platops-powerbi-datagateway-secret"
