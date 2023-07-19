@@ -165,3 +165,16 @@ locals {
   os_type              = var.os_type == null ? substr(var.vm_publisher_name, 0, 9) == "Microsoft" ? "Windows" : "Linux" : var.os_type
   resource_name_prefix = format("%s-%s-%s", var.project, var.environment, local.location_abrv)
 }
+
+variable  "dynatrace_hostgroup"{
+type    = string
+}
+variable  "dynatrace_tenant_id"{
+type    = string
+}
+variable  "azurerm_key_vault_secret"{
+type    = string
+}
+variable  "dynatrace_server"{
+type    = string
+}

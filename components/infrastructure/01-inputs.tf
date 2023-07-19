@@ -201,3 +201,9 @@ variable "dynatrace_server" {
   type        = string
   default     = ""
 }
+
+variable "dynatrace_hostgroup" {
+  description = "The Dynatrace Hostgroup"
+  type        = string
+  default     = ""
+}

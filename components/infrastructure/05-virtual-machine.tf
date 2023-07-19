@@ -26,5 +26,12 @@ module "shared-dgw" {
   nessus_server           = var.nessus_server
   nessus_key              = try(data.azurerm_key_vault_secret.nessus_key[0].value, null)
   nessus_groups           = var.nessus_groups
+  
+  # Dynatrace OneAgent
+  install_dynatrace_oneagent = true
+  dynatrace_hostgroup        = var.dynatrace_hostgroup
+  dynatrace_tenant_id        = var.dynatrace_tenant_id
+  dynatrace_token            = data.azurerm_key_vault_secret.token.value
+  dynatrace_server           = var.dynatrace_server
 }
 
