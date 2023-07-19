@@ -172,9 +172,6 @@ variable "dynatrace_hostgroup" {
 variable "dynatrace_tenant_id" {
   type = string
 }
-variable "azurerm_key_vault_secret" {
-  type = string
-}
 variable "dynatrace_server" {
   type = string
 }
