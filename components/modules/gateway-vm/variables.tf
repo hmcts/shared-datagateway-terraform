@@ -184,3 +184,9 @@ variable "install_dynatrace_oneagent" {
   description = "Install dynatrace oneagent on the virtual machine."
   default     = false
 }
+
+variable "dynatrace_token" {
+  type        = string
+  description = "The token to use when communicating with the Dynatrace ActiveGate."
+  default     = ""
+}
