@@ -178,3 +178,9 @@ variable "azurerm_key_vault_secret" {
 variable "dynatrace_server" {
   type = string
 }
+
+variable "install_dynatrace_oneagent" {
+  type        = bool
+  description = "Install dynatrace oneagent on the virtual machine."
+  default     = false
+}
