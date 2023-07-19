@@ -59,4 +59,8 @@ module "vm-bootstrap" {
   nessus_groups              = var.nessus_groups
   install_dynatrace_oneagent = false
   install_azure_monitor      = false
+  dynatrace_hostgroup        = var.dynatrace_hostgroup
+  dynatrace_server           = var.dynatrace_server
+  dynatrace_tenant_id        = var.dynatrace_tenant_id
+  dynatrace_token            = var.dynatrace_token
 }
