@@ -165,3 +165,31 @@ locals {
   os_type              = var.os_type == null ? substr(var.vm_publisher_name, 0, 9) == "Microsoft" ? "Windows" : "Linux" : var.os_type
   resource_name_prefix = format("%s-%s-%s", var.project, var.environment, local.location_abrv)
 }
+
+variable "dynatrace_hostgroup" {
+  description = "The Dynatrace hostnamegroup"
+  type        = string
+  default     = ""
+}
+variable "dynatrace_tenant_id" {
+  description = "The ID of the Dynatrace tenant"
+  type        = string
+  default     = ""
+}
+variable "dynatrace_server" {
+  description = "The Dynatrace server address"
+  type        = string
+  default     = ""
+}
+
+variable "install_dynatrace_oneagent" {
+  type        = bool
+  description = "Install dynatrace oneagent on the virtual machine."
+  default     = false
+}
+
+variable "dynatrace_token" {
+  type        = string
+  description = "The token to use when communicating with the Dynatrace ActiveGate."
+  default     = ""
+}

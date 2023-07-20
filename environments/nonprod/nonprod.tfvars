@@ -40,6 +40,7 @@ sku_name                     = "Basic"
 # Dynatrace for non-prod
 dynatrace_tenant_id = "yrk32651"
 dynatrace_server    = "https://10.10.70.8:9999/e/yrk32651/api"
+dynatrace_hostgroup = "cft-tm-powerbi-gateway"
 
 # VM Scale-Sets
 
