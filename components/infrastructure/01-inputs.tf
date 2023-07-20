@@ -203,7 +203,7 @@ variable "dynatrace_server" {
 }
 
 variable "dynatrace_hostgroup" {
-  description = "The Dynatrace Hostgroup"
+  description = "The Dynatrace hostgroup"
   type        = string
   default     = ""
 }

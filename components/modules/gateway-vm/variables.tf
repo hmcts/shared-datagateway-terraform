@@ -167,13 +167,19 @@ locals {
 }
 
 variable "dynatrace_hostgroup" {
-  type = string
+  description = "The Dynatrace hostnamegroup"
+  type        = string
+  default     = ""
 }
 variable "dynatrace_tenant_id" {
-  type = string
+  description = "The ID of the Dynatrace tenant"
+  type        = string
+  default     = ""
 }
 variable "dynatrace_server" {
-  type = string
+  description = "The Dynatrace server address"
+  type        = string
+  default     = ""
 }
 
 variable "install_dynatrace_oneagent" {
