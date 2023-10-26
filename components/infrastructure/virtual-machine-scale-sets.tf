@@ -1,6 +1,6 @@
 module "windows-vm-ss" {
   for_each             = var.vm_scale_sets
-  source               = "git::https://github.com/hmcts/terraform-module-virtual-machine-scale-set.git?DTSPO-15247"
+  source               = "git::https://github.com/hmcts/terraform-module-virtual-machine-scale-set.git?ref=DTSPO-15247"
   vm_type              = "windows-scale-set"
   vm_name              = each.key
   computer_name_prefix = "windatagw"
