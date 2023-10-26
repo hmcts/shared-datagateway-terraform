@@ -36,7 +36,6 @@ module "shared-dgw" {
   providers = {
     azurerm.cnp = azurerm.cnp
     azurerm.soc = azurerm.soc
-    azurerm     = azurerm
   }
 }
 
