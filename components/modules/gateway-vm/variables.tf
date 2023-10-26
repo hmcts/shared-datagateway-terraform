@@ -8,7 +8,10 @@ variable "product" {
   type    = string
   default = "shared-datagateway"
 }
-
+variable "environment" {
+  description = "Name of the environment for which the bastion is being deployed"
+  type        = string
+}
 variable "project" {
   type    = string
   default = "shared-dgw"
