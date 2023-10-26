@@ -42,6 +42,10 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
 
 
 module "vm-bootstrap" {
+  providers = {
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
   source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=master"
 
   for_each = {

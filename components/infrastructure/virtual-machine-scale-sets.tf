@@ -1,4 +1,8 @@
 module "windows-vm-ss" {
+  providers = {
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
   for_each             = var.vm_scale_sets
   source               = "git::https://github.com/hmcts/terraform-module-virtual-machine-scale-set.git?ref=DTSPO-15247"
   vm_type              = "windows-scale-set"
