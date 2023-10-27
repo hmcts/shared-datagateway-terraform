@@ -17,7 +17,7 @@ vm_zones = [
 # Splunk
 install_splunk_uf = true
 cnp_vault_rg      = "core-infra-prod"
-cnp_vault_sub     = "8999dec3-0104-4a27-94ee-6588559729d1"
+cnp_vault_sub     = "1c4f0704-a29e-403d-b719-b90c34ef14c9"
 
 # Nessus
 nessus_install  = true
