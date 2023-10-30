@@ -8,7 +8,6 @@ module "windows-vm-ss" {
   source               = "git::https://github.com/hmcts/terraform-module-virtual-machine-scale-set.git?ref=DTSPO-15247"
   vm_type              = "windows-scale-set"
   vm_name              = each.key
-  env                  = var.environment == "prod" ? var.environment : "nonprod"
   computer_name_prefix = "windatagw"
   vm_resource_group    = local.rg_name
   vm_sku               = each.value.vm_sku

@@ -90,9 +90,6 @@ variable "vm_sku" {
   type = string
 }
 
-variable "environment" {
-  type = string
-}
 
 variable "vm_version" {
   type = string
