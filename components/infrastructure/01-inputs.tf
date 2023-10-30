@@ -4,10 +4,10 @@ variable "location" {
   default = "UK South"
 }
 
-variable "environment" {
+variable "environment" {}
+variable "env" {
   type = string
 }
-
 variable "infra_hub_suffix" {
   type    = string
   default = "nonprodi"
@@ -60,9 +60,6 @@ variable "vm_zones" {
   description = "Zone and VM entry detail"
 }
 
-variable "env" {
-  type = string
-}
 
 # Splunk
 variable "install_splunk_uf" {

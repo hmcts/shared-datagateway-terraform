@@ -5,7 +5,7 @@ module "windows-vm-ss" {
     azurerm     = azurerm
   }
   for_each             = var.vm_scale_sets
-  source               = "git::https://github.com/hmcts/terraform-module-virtual-machine-scale-set.git?ref=main"
+  source               = "git::https://github.com/hmcts/terraform-module-virtual-machine-scale-set.git?ref=DTSPO-15247"
   vm_type              = "windows-scale-set"
   vm_name              = each.key
   computer_name_prefix = "windatagw"
@@ -32,6 +32,7 @@ module "windows-vm-ss" {
   nessus_server        = var.nessus_server
   nessus_key           = try(data.azurerm_key_vault_secret.nessus_key[0].value, null)
   nessus_groups        = var.nessus_groups
+  environment          = var.environment
 
   # Dynatrace OneAgent
   install_dynatrace_oneagent = true

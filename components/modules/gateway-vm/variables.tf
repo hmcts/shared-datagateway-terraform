@@ -35,7 +35,9 @@ variable "location" {
 variable "environment" {
   type = string
 }
-
+variable "env" {
+  type = string
+}
 variable "rg_name" {
   type = string
 }
@@ -192,3 +194,4 @@ variable "dynatrace_token" {
   description = "The token to use when communicating with the Dynatrace ActiveGate."
   default     = ""
 }
+
