@@ -4,7 +4,9 @@ variable "location" {
   default = "UK South"
 }
 
-variable "environment" {}
+variable "environment" {
+  type = string
+}
 variable "env" {
   type = string
 }

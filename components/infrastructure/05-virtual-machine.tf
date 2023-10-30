@@ -1,7 +1,7 @@
 module "shared-dgw" {
   source                  = "../modules/gateway-vm"
-  env                     = var.env
   location                = var.location
+  environment             = var.environment
   rg_name                 = local.rg_name
   project                 = var.project
   shared_dgw_rg_location  = azurerm_resource_group.shared-datagateway-rg.location
@@ -38,4 +38,3 @@ module "shared-dgw" {
     azurerm.soc = azurerm.soc
   }
 }
-
