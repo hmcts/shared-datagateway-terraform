@@ -193,3 +193,7 @@ variable "dynatrace_token" {
   description = "The token to use when communicating with the Dynatrace ActiveGate."
   default     = ""
 }
+
+variable "env" {
+  type = string
+}
