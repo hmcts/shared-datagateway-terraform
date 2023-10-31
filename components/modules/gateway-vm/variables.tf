@@ -194,6 +194,3 @@ variable "dynatrace_token" {
   default     = ""
 }
 
-variable "env" {
-  type = string
-}
