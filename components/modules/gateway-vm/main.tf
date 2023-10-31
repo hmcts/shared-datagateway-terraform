@@ -43,7 +43,10 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
 
 module "vm-bootstrap" {
   source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=master"
-
+  providers = {
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
   for_each = {
     for idx, entry in var.vm_zones : "shared-dgw-bootstrap-${entry.vm_count}" => entry
   }
@@ -63,4 +66,5 @@ module "vm-bootstrap" {
   dynatrace_server           = var.dynatrace_server
   dynatrace_tenant_id        = var.dynatrace_tenant_id
   dynatrace_token            = var.dynatrace_token
+    
 }
