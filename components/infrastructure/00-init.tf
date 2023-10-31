@@ -1,17 +1,17 @@
 terraform {
-  required_version = ">= 1.5.3"
+  required_version = ">= 1.3.2"
 
   backend "azurerm" {
-   }
-
+  }
 
   required_providers {
-     azurerm = {
-       source                = "hashicorp/azurerm"
-       configuration_aliases = [azurerm.cnp, azurerm.soc]
-       version               = ">= 3.75.0"
-     }
-   }
+    azurerm = {
+      source                = "hashicorp/azurerm"
+      configuration_aliases = [azurerm.cnp, azurerm.soc]
+      version               = ">= 3.75.0"
+    }
+  }
+}
 
 provider "azurerm" {
   features {}
@@ -36,4 +36,3 @@ provider "azurerm" {
   features {}
   subscription_id = var.cnp_vault_sub
 }
-
