@@ -1,4 +1,8 @@
 module "shared-dgw" {
+  providers = {
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
   source                  = "../modules/gateway-vm"
   location                = var.location
   environment             = var.environment
@@ -34,8 +38,4 @@ module "shared-dgw" {
   dynatrace_token            = data.azurerm_key_vault_secret.token.value
   dynatrace_server           = var.dynatrace_server
   env                        = var.env
-  providers = {
-    azurerm.cnp = azurerm.cnp
-    azurerm.soc = azurerm.soc
-  }
 }
