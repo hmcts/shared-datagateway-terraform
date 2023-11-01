@@ -4,8 +4,9 @@ terraform {
 
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = ">= 2.88.1"
+      source                = "hashicorp/azurerm"
+      version               = ">= 3.75.0"
+      configuration_aliases = [azurerm.cnp, azurerm.soc]
     }
   }
 }

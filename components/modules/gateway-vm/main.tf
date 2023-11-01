@@ -1,8 +1,3 @@
-# Provider Block
-provider "azurerm" {
-  features {}
-}
-
 resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
   for_each = {
     for idx, entry in var.vm_zones : "shared-dgw-vm-${entry.vm_count}" => entry
@@ -44,9 +39,16 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
 module "vm-bootstrap" {
   source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=master"
 
+  providers = {
+    azurerm     = azurerm
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
+
   for_each = {
     for idx, entry in var.vm_zones : "shared-dgw-bootstrap-${entry.vm_count}" => entry
   }
+
   virtual_machine_type       = "vm"
   virtual_machine_id         = azurerm_windows_virtual_machine.shared_dgw_vm["${var.project}-vm-${each.value.vm_count}"].id
   splunk_username            = var.splunk_username

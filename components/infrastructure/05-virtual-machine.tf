@@ -1,5 +1,12 @@
 module "shared-dgw" {
-  source                  = "../modules/gateway-vm"
+  source = "../modules/gateway-vm"
+
+  providers = {
+    azurerm     = azurerm
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
+
   location                = var.location
   environment             = var.environment
   rg_name                 = local.rg_name
