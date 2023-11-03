@@ -18,7 +18,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
       RegionKey           = each.value.regionkey
     })]))
   })
-  #depends_on = [module.windows-vm-ss]
+  depends_on = [module.windows-vm-ss]
 }
 
 locals {
@@ -32,9 +32,9 @@ locals {
 
 
 data "external" "bash_script" {
-  for_each = var.vm_scale_sets
-  program  = ["bash", "${path.module}/scripts/get_instance_name.bash", local.rg_name, each.key, var.hub_subscription_id]
-  #depends_on = [module.windows-vm-ss]
+  for_each   = var.vm_scale_sets
+  program    = ["bash", "${path.module}/scripts/get_instance_name.bash", local.rg_name, each.key, var.hub_subscription_id]
+  depends_on = [module.windows-vm-ss]
 }
 
 data "azurerm_key_vault_secret" "platops_powerbi_datagateway_secret" {
