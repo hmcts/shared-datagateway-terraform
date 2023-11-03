@@ -18,7 +18,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
       RegionKey           = each.value.regionkey
     })]))
   })
-  depends_on = [module.windows-vm-ss]
+  #depends_on = [module.windows-vm-ss]
 }
 
 locals {
