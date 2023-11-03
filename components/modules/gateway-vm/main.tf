@@ -47,7 +47,7 @@ module "vm-bootstrap" {
     azurerm.soc = azurerm.soc
     azurerm     = azurerm
   }
-  source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=master"
+  source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=DTSPO-15247"
 
   for_each = {
     for idx, entry in var.vm_zones : "shared-dgw-bootstrap-${entry.vm_count}" => entry
