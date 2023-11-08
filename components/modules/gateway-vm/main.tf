@@ -42,7 +42,12 @@ resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
 
 
 module "vm-bootstrap" {
-  source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=master"
+  providers = {
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+    azurerm     = azurerm
+  }
+  source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=DTSPO-15247"
 
   for_each = {
     for idx, entry in var.vm_zones : "shared-dgw-bootstrap-${entry.vm_count}" => entry
@@ -53,6 +58,7 @@ module "vm-bootstrap" {
   splunk_password            = var.splunk_password
   splunk_pass4symmkey        = var.splunk_pass4symmkey
   splunk_group               = "hmcts_forwarders"
+  env                        = var.environment == "prod" ? var.environment : "nonprod"
   os_type                    = local.os_type
   nessus_server              = var.nessus_server
   nessus_key                 = var.nessus_key
