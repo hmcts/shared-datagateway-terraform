@@ -4,7 +4,7 @@ module "windows-vm-ss" {
   providers = {
     azurerm.cnp = azurerm.cnp
     azurerm.soc = azurerm.soc
-    azurerm     = azurerm.cnp
+    azurerm     = azurerm
   }
 
   vm_type              = "windows-scale-set"
