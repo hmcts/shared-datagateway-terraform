@@ -13,6 +13,8 @@ terraform {
   }
 }
 
+resource "azurerm_windows_virtual_machine_scale_set" "windows_scale_set" {
+}
 provider "azurerm" {
   features {}
   skip_provider_registration = true
