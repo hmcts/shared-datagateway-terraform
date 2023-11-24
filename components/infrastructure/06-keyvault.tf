@@ -9,17 +9,11 @@ data "azurerm_key_vault" "shared_dgw_kv" {
 data "azurerm_key_vault_secret" "vm_admin_password" {
   name         = "${var.project}-admin-password"
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 data "azurerm_key_vault_secret" "vm_admin_user" {
   name         = "${var.project}-admin-user"
   key_vault_id = data.azurerm_key_vault.shared_dgw_kv.id
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 resource "azurerm_key_vault" "shared-dgw-key-vault" {
