@@ -38,6 +38,9 @@ resource "random_password" "vm_password" {
   min_upper        = 1
   min_lower        = 1
   min_numeric      = 1
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "azurerm_key_vault_secret" "vm_password_secret" {
