@@ -157,7 +157,7 @@ variable "nessus_groups" {
 
 variable "prod_vm_name" {
   type    = string
-  default = "shared-gw-prd"
+  default = "shared-dgw-prd"
 }
 
 # Locals
