@@ -10,7 +10,7 @@ variable "product" {
 }
 variable "project" {
   type    = string
-  default = "shared-dgw"
+  default = "shared-gw"
 }
 
 variable "shared_dgw_rg_location" {
@@ -157,7 +157,7 @@ variable "nessus_groups" {
 
 variable "prod_vm_name" {
   type    = string
-  default = "shared-dgw-prd"
+  default = "shared-gw-prd"
 }
 
 # Locals
