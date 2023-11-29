@@ -40,7 +40,7 @@ variable "product" {
 
 variable "project" {
   type    = string
-  default = "shared-dgw"
+  default = "shared-gw"
 }
 
 # Virtual Machine
