@@ -54,7 +54,7 @@ module "vm-bootstrap" {
     # for idx, entry in var.vm_zones : "shared-dgw-vm-${entry.vm_count}" => entry
   }
   virtual_machine_type = "vm"
-  virtual_machine_id   = var.environment == "nonprod" ? azurerm_windows_virtual_machine.shared_dgw_vm["${var.project}-vm-${each.value.vm_count}"].id : azurerm_windows_virtual_machine.shared_dgw_vm["shared-gw-prd-${each.value.vm_count}"].id
+  virtual_machine_id   = azurerm_windows_virtual_machine.shared_dgw_vm[each.key].id
   # virtual_machine_id         = azurerm_windows_virtual_machine.shared_dgw_vm["${var.project}-vm-${each.value.vm_count}"].id
   splunk_username            = var.splunk_username
   splunk_password            = var.splunk_password
