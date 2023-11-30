@@ -10,7 +10,7 @@ variable "product" {
 }
 variable "project" {
   type    = string
-  default = "shared-dgw"
+  default = ""
 }
 
 variable "shared_dgw_rg_location" {
