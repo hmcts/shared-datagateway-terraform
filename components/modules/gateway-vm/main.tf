@@ -50,7 +50,8 @@ module "vm-bootstrap" {
   source = "git::https://github.com/hmcts/terraform-module-vm-bootstrap.git?ref=DTSPO-15247"
 
   for_each = {
-    for idx, entry in var.vm_zones : "shared-dgw-vm-${entry.vm_count}" => entry
+    for idx, entry in var.vm_zones : var.environment == "prod" ? "shared-gw-prd-${entry.vm_count}" : "shared-dgw-vm-${entry.vm_count}" => entry
+    # for idx, entry in var.vm_zones : "shared-dgw-vm-${entry.vm_count}" => entry
   }
   virtual_machine_type = "vm"
   virtual_machine_id   = var.environment == "nonprod" ? azurerm_windows_virtual_machine.shared_dgw_vm["${var.project}-vm-${each.value.vm_count}"].id : azurerm_windows_virtual_machine.shared_dgw_vm["shared-gw-prd-${each.value.vm_count}"].id
