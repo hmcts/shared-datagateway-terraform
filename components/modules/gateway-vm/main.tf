@@ -5,7 +5,7 @@ provider "azurerm" {
 
 resource "azurerm_windows_virtual_machine" "shared_dgw_vm" {
   for_each = {
-    for idx, entry in var.vm_zones : "shared-gw-prd-${entry.vm_count}" => entry
+    for idx, entry in var.vm_zones : "shared-dgw-${entry.vm_count}" => entry
   }
 
   name                = var.environment == "prod" ? format("%s-%s", var.prod_vm_name, each.value.vm_count) : format("%s-vm-%s", var.project, each.value.vm_count)
