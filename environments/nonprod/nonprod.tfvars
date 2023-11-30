@@ -3,6 +3,7 @@ hub_subscription_id = "fb084706-583f-4c9a-bdab-949aac66ba5c"
 environment         = "nonprod"
 infra_hub_suffix    = "nonprodi"
 buildEnv            = "stg"
+
 vm_zones = [
   {
     vm_count = 1,

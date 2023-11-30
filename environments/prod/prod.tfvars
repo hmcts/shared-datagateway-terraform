@@ -3,7 +3,7 @@ hub_subscription_id = "0978315c-75fe-4ada-9d11-1eb5e0e0b214"
 environment         = "prod"
 infra_hub_suffix    = "prod-int"
 buildEnv            = "prod"
-project             = "shared-gw"
+
 vm_zones = [
   {
     vm_count = 0,
