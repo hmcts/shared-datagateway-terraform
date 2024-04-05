@@ -27,7 +27,7 @@ nessus_key_name = "nessus-agent-key-prod"
 
 # Dynatrace for prod
 dynatrace_tenant_id = "ebe20728"
-dynatrace_server    = "https://10.10.70.30:9999/e/ebe20728/api"
+dynatrace_server    = "https://dynatrace-activegate-prod.platform.hmcts.net:9999/e/ebe20728/api"
 dynatrace_hostgroup = "cft-tm-powerbi-gateway"
 
 # VM SKU
