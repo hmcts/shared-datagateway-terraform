@@ -36,7 +36,7 @@ vm_publisher            = "center-for-internet-security-inc"
 vm_offer                = "cis-windows-server-2022-l2"
 vm_sku                  = "cis-windows-server-2022-l2-gen2"
 vm_version              = "latest"
-vm_size                 = "Standard_D8ds_v5"
+vm_size                 = "Standard_D2ds_v5"
 vm_storage_account_type = "StandardSSD_LRS"
 
 # Automation acount
