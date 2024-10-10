@@ -58,6 +58,7 @@ vm_scale_sets = {
       nic0 = { name = "data-gw-vmss-prod-uksouth-nic",
         primary        = true,
         ip_config_name = "data-gw-vmss-prod-uksouth-ipconfig",
+        subnet_id      = "/subscriptions/0978315c-75fe-4ada-9d11-1eb5e0e0b214/resourceGroups/hmcts-hub-prod-int/providers/Microsoft.Network/virtualNetworks/hmcts-hub-prod-int/subnets/shared-data-gateway",
       }
     }
     managed_disks = {
@@ -80,6 +81,7 @@ vm_scale_sets = {
       nic0 = { name = "data-gw-vmss-prod-northeu-nic",
         primary        = true,
         ip_config_name = "data-gw-vmss-prod-northeu-ipconfig",
+        subnet_id      = "/subscriptions/0978315c-75fe-4ada-9d11-1eb5e0e0b214/resourceGroups/hmcts-hub-prod-int/providers/Microsoft.Network/virtualNetworks/hmcts-hub-prod-int/subnets/shared-data-gateway",
       }
     }
     managed_disks = {
