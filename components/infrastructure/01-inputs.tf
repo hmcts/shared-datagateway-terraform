@@ -135,7 +135,8 @@ variable "sku_name" {
 
 variable "subnet_service_endpoints" {
   default = [
-    "Microsoft.Sql"
+    "Microsoft.Sql",
+    "Microsoft.Storage",
   ]
 }
 variable "vm_scale_sets" {

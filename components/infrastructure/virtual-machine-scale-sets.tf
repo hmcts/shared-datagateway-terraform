@@ -5,6 +5,7 @@ module "windows-vm-ss" {
     azurerm.cnp = azurerm.cnp
     azurerm.soc = azurerm.soc
     azurerm     = azurerm
+    azurerm.dcr = azurerm.dcr
   }
 
   vm_type              = "windows-scale-set"
@@ -19,7 +20,6 @@ module "windows-vm-ss" {
   vm_image_sku         = "2022-Datacenter"
   vm_version           = "latest"
   vm_instances         = each.value.vm_instances
-  subnet_id            = azurerm_subnet.gateway_subnet.id
   network_interfaces   = each.value.network_interfaces
   managed_disks        = each.value.managed_disks
   kv_name              = azurerm_key_vault.shared-dgw-key-vault.name

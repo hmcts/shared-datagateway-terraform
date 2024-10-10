@@ -52,8 +52,11 @@ vm_scale_sets = {
     vm_instances         = 2
     network_interfaces = {
       nic0 = { name = "data-gw-vmss-nonprod-uksouth-nic",
-        primary        = true,
-        ip_config_name = "data-gw-vmss-nonprod-uksouth-ipconfig",
+        primary                                = true,
+        ip_config_name                         = "data-gw-vmss-nonprod-uksouth-ipconfig",
+        subnet_id                              = "/subscriptions/fb084706-583f-4c9a-bdab-949aac66ba5c/resourceGroups/hmcts-hub-nonprodi/providers/Microsoft.Network/virtualNetworks/hmcts-hub-nonprodi/subnets/shared-data-gateway",
+        load_balancer_backend_address_pool_ids = [],
+        load_balancer_inbound_nat_rules_ids    = [],
       }
     }
     managed_disks = {
@@ -74,8 +77,11 @@ vm_scale_sets = {
     vm_instances         = 2
     network_interfaces = {
       nic0 = { name = "data-gw-vmss-nonprod-northeu-nic",
-        primary        = true,
-        ip_config_name = "data-gw-vmss-nonprod-northeu-ipconfig",
+        primary                                = true,
+        ip_config_name                         = "data-gw-vmss-nonprod-northeu-ipconfig",
+        subnet_id                              = "/subscriptions/fb084706-583f-4c9a-bdab-949aac66ba5c/resourceGroups/hmcts-hub-nonprodi/providers/Microsoft.Network/virtualNetworks/hmcts-hub-nonprodi/subnets/shared-data-gateway",
+        load_balancer_backend_address_pool_ids = [],
+        load_balancer_inbound_nat_rules_ids    = [],
       }
     }
     managed_disks = {
