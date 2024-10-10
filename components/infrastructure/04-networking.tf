@@ -20,11 +20,12 @@ data "azurerm_virtual_network" "vnet_data" {
 }
 
 resource "azurerm_subnet" "gateway_subnet" {
-  name                 = "shared-data-gateway"
-  resource_group_name  = data.azurerm_virtual_network.vnet_data.resource_group_name
-  virtual_network_name = data.azurerm_virtual_network.vnet_data.name
-  address_prefixes     = [var.subnet_prefix]
-  service_endpoints    = var.subnet_service_endpoints
+  name                              = "shared-data-gateway"
+  resource_group_name               = data.azurerm_virtual_network.vnet_data.resource_group_name
+  virtual_network_name              = data.azurerm_virtual_network.vnet_data.name
+  address_prefixes                  = [var.subnet_prefix]
+  service_endpoints                 = var.subnet_service_endpoints
+  private_endpoint_network_policies = "Enabled"
 
 }
 
