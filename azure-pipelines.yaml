@@ -9,7 +9,7 @@ resources:
   repositories:
     - repository: cnp-azuredevops-libraries
       type: github
-      ref: use-tfenv
+      ref: tfswitch-pgp-key
       name: hmcts/cnp-azuredevops-libraries
       endpoint: 'hmcts'
 
