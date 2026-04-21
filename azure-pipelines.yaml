@@ -9,7 +9,7 @@ resources:
   repositories:
     - repository: cnp-azuredevops-libraries
       type: github
-      ref: tfswitch-pgp-key-workaround
+      ref: 'copilot/tfswitch-pgp-key-workaround'
       name: hmcts/cnp-azuredevops-libraries
       endpoint: 'hmcts'
 
