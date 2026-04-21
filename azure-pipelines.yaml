@@ -86,9 +86,6 @@ stages:
                 environment: ${{ deployment.environment }}
                 component: "infrastructure"
                 terraformInitSubscription: ${{ variables.terraformInitSubscription }}
-                initCommandOptions: >-
-                  -reconfigure
-                  -backend-config resource_group_name=${{ deployment.resourceGroupName }}
                 planCommandOptions: >-
                   -compact-warnings
                   -lock-timeout=30s
