@@ -37,8 +37,8 @@ parameters:
       - destroy
 
 variables:
-  - name: tfversion
-    value: 1.0.11
+  - name: tfenvVersion
+    value: 1.9.7
   - name: timeoutInMinutes
     value: "60"
   - name: agentPool
