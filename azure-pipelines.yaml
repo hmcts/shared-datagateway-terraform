@@ -80,6 +80,7 @@ stages:
             - template: steps/terraform.yaml@cnp-azuredevops-libraries
               parameters:
                 serviceConnection: "HMCTS-HUB-${{ upper(deployment.environment) }}-INTSVC"
+                backendResourceGroupName: ${{ deployment.resourceGroupName }}
                 product: $(product)
                 overrideAction: ${{ parameters.overrideAction }}
                 environment: ${{ deployment.environment }}
