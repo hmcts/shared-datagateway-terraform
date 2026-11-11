@@ -6,6 +6,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "azure_vmss_run_command" 
   type                         = "RunCommandWindows"
   type_handler_version         = "1.1"
   auto_upgrade_minor_version   = true
+  force_update_tag             = var.gateway_trigger == null ? null : tostring(var.gateway_trigger)
   protected_settings = jsonencode({
     script = compact(tolist([templatefile("${path.module}/scripts/gw_install.ps1", {
       App_Id              = local.app_id
