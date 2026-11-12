@@ -30,6 +30,9 @@ vm_version              = "latest"
 vm_size                 = "Standard_D2ds_v5"
 vm_storage_account_type = "StandardSSD_LRS"
 
+# Increment to download and install the latest gateway release.
+gateway_trigger = 1
+
 # Automation acount
 automation_account_name      = "shared-dgw-automation"
 log_analytics_workspace_name = "shared-dgw-workspace"

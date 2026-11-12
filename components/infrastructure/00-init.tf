@@ -8,7 +8,7 @@ terraform {
     azurerm = {
       source                = "hashicorp/azurerm"
       configuration_aliases = [azurerm.cnp, azurerm.soc]
-      version               = ">= 3.75.0"
+      version               = ">= 3.75.0, < 5.0.0"
     }
   }
 }
