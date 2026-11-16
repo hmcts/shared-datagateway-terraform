@@ -47,7 +47,7 @@ dynatrace_hostgroup = "cft-tm-powerbi-gateway"
 vm_scale_sets = {
   data-gw-vmss-nonprod-uksouth = {
     regionkey            = "uksouth"
-    vm_sku               = "Standard_D4ds_v5"
+    vm_sku               = "Standard_D2ds_v5"
     vm_availabilty_zones = ["1"]
     vm_instances         = 2
     network_interfaces = {
@@ -72,7 +72,7 @@ vm_scale_sets = {
 
   data-gw-vmss-nonprod-northeu = {
     regionkey            = "northeurope"
-    vm_sku               = "Standard_D4ds_v5"
+    vm_sku               = "Standard_D2ds_v5"
     vm_availabilty_zones = ["1"]
     vm_instances         = 2
     network_interfaces = {
