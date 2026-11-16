@@ -68,6 +68,12 @@ variable "install_splunk_uf" {
   default = false
 }
 
+variable "purge_protection_enabled" {
+  type        = bool
+  description = "Enable Key Vault purge protection. Irreversible once enabled."
+  default     = false
+}
+
 variable "cnp_vault_rg" {
   type = string
 }

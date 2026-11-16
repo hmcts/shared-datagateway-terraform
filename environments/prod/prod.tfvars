@@ -14,6 +14,9 @@ vm_zones = [
   }
 ]
 
+# Key Vault
+purge_protection_enabled = true
+
 # Splunk
 install_splunk_uf = true
 cnp_vault_rg      = "core-infra-prod"
