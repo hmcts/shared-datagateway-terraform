@@ -98,6 +98,12 @@ variable "vm_publisher_name" {
   type = string
 }
 
+variable "gateway_trigger" {
+  type        = number
+  default     = null
+  description = "Increment this value to rerun the data gateway installation script for an environment."
+}
+
 # Nessus Agent
 variable "nessus_install" {
   type    = bool
